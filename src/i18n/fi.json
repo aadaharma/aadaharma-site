@@ -22,7 +22,7 @@
     "metaTitle": "Aada Härmä — kädentaitojen verkkotyökaluja",
     "description": "Verkkotyökaluja ja neuleohjeita: karjalaisen kirjonnan mallityökalu, neuleohjekirjasto, ja neulemallien generaattori tulossa.",
     "title": "Työkaluja kädentaitojen oppimiseen ja projektien suunnitteluun",
-    "lead": "Olen Aada: kirjoja, neuloja ja tekniikan opiskelija. Teen pieniä verkkotyökaluja, jotka helpottavat mallien suunnittelua.",
+    "lead": "Moi, olen Aada, netissä myös BoingoDuck. Olen kädentaitojen harrastaja ja tekniikan opiskelija. Teen pieniä verkkotyökaluja, jotka tekevät mallien suunnittelusta helpompaa ja saavutettavampaa kaikille.",
     "cta": "Tutustu kirjontatyökaluun",
     "projectsTitle": "Projektit",
     "embroideryCard": {
@@ -33,9 +33,9 @@
     },
     "knittingCard": {
       "tag": "Työn alla",
-      "title": "Neulemallien generaattori",
+      "title": "Villapaitamallien generaattori",
       "text": "Tuleva työkalu neulemallien suunnitteluun. Ideana on, että voit syöttää omat mitat ja neuletiheyden, ja työkalu laskee silmukka- ja kerrosmäärät.",
-      "link": "Kurkista suunnitelmiin",
+      "link": "Lue lisää",
       "mockupAlt": "Luonnos neulemallien generaattorista: kirjoneuleen tähtikaavio ja kahden langan väripaletti"
     },
     "patternsCard": {
@@ -57,20 +57,12 @@
   "embroidery": {
     "metaTitle": "Karjalaisen kirjonnan kaavioiden piirtotyökalu",
     "description": "Ilmainen verkkotyökalu karjalaisen kirjonnan mallien piirtämiseen ruudukolle ja lataamiseen PDF-tiedostona.",
-    "eyebrow": "Projekti",
     "title": "Karjalaisen kirjonnan suunnittelija",
     "lead": "Verkkotyökalu karjalaisen kirjonnan mallien luonnosteluun.",
     "cta": "Avaa suunnittelija",
-    "ctaNote": "Ilmainen, toimii selaimessa",
     "photoAlt": "Kirjottu kirjanmerkki: valkoisia karjalaistyylisiä lintuja ja kiemuroita sinisellä kankaalla",
-    "photoCaption": "Lintuja ja kiemuroita: kirjanmerkki, jonka kirjoin.",
-    "storyTitle": "Miksi tein sen",
-    "story": [
-      "Idea syntyi omasta kirjonnastani. Kun aloin suunnitella omia mallejani, huomasin nopeasti, ettei karjalaisen kirjonnan mallien tekemiseen ollut valmiita työkaluja.",
-      "Paperille luonnostelu on nopeaa ja helppoa, mutta halusin tavan koota yhteen kuvioita ja aiheita, joita karjalaisessa kirjonnassa käytetään yhä uudelleen."
-    ],
     "screenshotAlt": "Kuvakaappaus karjalaisen kirjonnan suunnittelijasta: pistotyökalujen työkalurivi ja ruudukko, jolle on piirretty punainen lintukuvio",
-    "featuresTitle": "Mitä sillä voi tehdä",
+    "featuresTitle": "Nykyiset ominaisuudet",
     "features": [
       "Piirrä ruudukolle suoria, vinoja ja ristipistoja",
       "Valitse langan väri",
@@ -78,20 +70,18 @@
       "Pyyhi virheet tai aloita alusta tyhjällä ruudukolla",
       "Lataa valmis malli PDF-tiedostona"
     ],
-    "plannedTitle": "Tulossa",
+    "plannedTitle": "Tulevat ominaisuudet",
     "planned": [
       "Valmiita perinteisiä kuvioita mallipohjiksi",
-      "Omien kuvioiden tallentaminen mallipohjiksi",
-      "Mallien jakaminen muiden kirjojien kanssa"
+      "Omien kuvioiden tallentaminen mallipohjiksi"
     ],
     "traditionTitle": "Karjalaisesta kirjonnasta",
-    "tradition": "Karjalainen kirjonta on perinteinen lankoja laskien tehtävä kirjontatekniikka Karjalasta. Pistot seuraavat tasakutoisen kankaan lankoja ja muodostavat geometrisia kuvioita: vinoneliöitä, ristejä, oksia ja lintuja, perinteisesti punaisella valkoiselle pellavalle.",
+    "tradition": "Karjalainen kirjonta on perinteinen lankoja laskien tehtävä kirjontatekniikka Karjalasta. Pistot seuraavat tasakutoisen kankaan lankoja ja muodostavat geometrisia kuvioita: vinoneliöitä, ristejä, oksia ja lintuja. Kirjonta tehdään perinteisesti punaisella valkoiselle pellavalle.",
     "closingTitle": "Valmiina suunnittelemaan oman mallisi?"
   },
   "knitting": {
-    "metaTitle": "Neulemallien generaattori — Aada Härmä",
+    "metaTitle": "Neulemallien generaattori",
     "description": "Tuleva työkalu kirjoneuleen mallikaavioiden suunnitteluun.",
-    "eyebrow": "Tulossa myöhemmin",
     "title": "Neulemallien generaattori",
     "lead": "Työkalu kirjoneuleen mallikaavioiden suunnitteluun: juuri sellaisten, joita neulon esimerkiksi tällaisiin sukkiin.",
     "photoAlt": "Keskeneräinen sukka sukkapuikoilla, vihreä-harmaa kirjoneulekuvio",
@@ -102,8 +92,7 @@
       "Laske silmukat ja kerrokset neuletiheydestä",
       "Vie kaaviot tulostettaviksi tai neulottaviksi"
     ],
-    "meanwhile": "Sillä välin voit selata neuleohjeitani",
-    "photoCaption": "Keskeneräiset kirjoneulesukat: juuri tällaisia kaavioita haluan työkalun piirtävän."
+    "meanwhile": "Sillä välin voit selata neuleohjeitani"
   },
   "theme": {
     "label": "Väriteema",
@@ -112,11 +101,10 @@
     "dark": "Tumma"
   },
   "patterns": {
-    "metaTitle": "Neuleohjeet — Aada Härmä",
+    "metaTitle": "Neuleohjeet",
     "description": "Aada Härmän kirjoittamia ilmaisia neuleohjeita: langat, puikot, neuletiheys ja kirjoneulekaaviot. Valmiina tulostettaviksi.",
-    "eyebrow": "Ohjekirjasto",
-    "title": "Neuleohjeet",
-    "lead": "Ohjeita, jotka olen itse kirjoittanut ja neulonut. Jokaisessa on lanka, puikot ja neuletiheys, tarvittaessa kaavio, ja ne tulostuvat siististi A4-arkille.",
+    "title": "Neuleohjekirjasto",
+    "lead": "Kokoelma ilmaisia neuleohjeitani.",
     "heroCaption": "Selbun tähti · 15 × 15 silmukkaa",
     "listTitle": "Kaikki ohjeet",
     "filters": {

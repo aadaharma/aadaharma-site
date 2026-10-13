@@ -16,7 +16,8 @@ export default async function KnittingPage({ params }: PageProps<'/[lang]/knitti
     <>
       <section className="hero container">
         <div className="hero__text">
-          <p className="eyebrow">{t.eyebrow}</p>
+          {/* No eyebrow text; the empty line keeps the hero's spacing */}
+          <p className="eyebrow" />
           <h1>{t.title}</h1>
           <p className="lead">{t.lead}</p>
         </div>
@@ -28,7 +29,6 @@ export default async function KnittingPage({ params }: PageProps<'/[lang]/knitti
       <section className="container section made" aria-labelledby="plans-title">
         <figure className="reveal">
           <img className="photo knit-photo" src="/img/sock.webp" alt={t.photoAlt} width={900} height={900} loading="lazy" />
-          <figcaption>{t.photoCaption}</figcaption>
         </figure>
         <div className="prose reveal">
           <h2 id="plans-title">{t.plansTitle}</h2>
