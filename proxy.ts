@@ -19,6 +19,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Skip Next.js internals and files (fonts, images, favicon)
-  matcher: ['/((?!_next/|api/|.*\\.[\\w]+$).*)'],
+  // Skip Next.js internals, files (fonts, images, favicon) and the embroidery app,
+  // which next.config.ts serves from GitHub Pages
+  matcher: ['/((?!_next/|api/|karelianembroiderymaker(?:/|$)|.*\\.[\\w]+$).*)'],
 }
