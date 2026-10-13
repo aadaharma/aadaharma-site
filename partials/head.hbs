@@ -1,0 +1,30 @@
+<meta charset="UTF-8" />
+<script>
+  document.documentElement.classList.add('js')
+  try {
+    const theme = localStorage.getItem('theme')
+    if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme
+  } catch {}
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{{#with meta}}
+<title>{{metaTitle}}</title>
+<meta name="description" content="{{description}}" />
+<meta property="og:title" content="{{metaTitle}}" />
+<meta property="og:description" content="{{description}}" />
+{{/with}}
+<meta property="og:type" content="website" />
+<meta property="og:image" content="{{siteUrl}}/img/bookmark.webp" />
+{{#if canonical}}
+<link rel="canonical" href="{{canonical}}" />
+<meta property="og:url" content="{{canonical}}" />
+{{/if}}
+{{#each alternates}}
+<link rel="alternate" hreflang="{{lang}}" href="{{href}}" />
+{{/each}}
+<meta name="color-scheme" content="light dark" />
+<meta name="theme-color" content="#f6ece0" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#1c1410" media="(prefers-color-scheme: dark)" />
+<link rel="icon" href="/favicon.ico" />
+<link rel="preload" href="/fonts/YesevaOne-Regular.woff" as="font" type="font/woff" crossorigin />
+<link rel="preload" href="/fonts/WorkSans-Regular.woff" as="font" type="font/woff" crossorigin />
