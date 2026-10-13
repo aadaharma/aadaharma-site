@@ -1,9 +1,9 @@
 import type { NextConfig } from 'next'
 
-// The Karelian Embroidery Designer is its own repo (aadaharma/karelianembroiderymaker),
-// still published by GitHub Pages. It's served under aadaharma.com from there.
+// The Karelian Embroidery Designer is its own repo (aadaharma/karelianembroiderymaker)
+// and its own Vercel project. It's served under aadaharma.com from there.
 const EMBROIDERY_APP_PATH = '/karelianembroiderymaker'
-const EMBROIDERY_APP_ORIGIN = 'https://aadaharma.github.io/karelianembroiderymaker'
+const EMBROIDERY_APP_ORIGIN = 'https://karelianembroiderymaker.vercel.app'
 
 const nextConfig: NextConfig = {
   async rewrites() {
