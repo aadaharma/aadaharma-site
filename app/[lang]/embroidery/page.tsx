@@ -15,13 +15,13 @@ export default async function EmbroideryPage({ params }: PageProps<'/[lang]/embr
     <>
       <section className="hero container">
         <div className="hero__text">
-          <p className="eyebrow">{t.eyebrow}</p>
+          {/* No eyebrow text; the empty line keeps the hero's spacing */}
+          <p className="eyebrow" />
           <h1>{t.title}</h1>
           <p className="lead">{t.lead}</p>
           <a className="button" href={DESIGNER_URL}>
             {t.cta} <span aria-hidden="true">↗</span>
           </a>
-          <p className="note">{t.ctaNote}</p>
         </div>
         <AppFrame url="aadaharma.com/karelianembroiderymaker">
           <img src="/img/designer.webp" alt={t.screenshotAlt} width={500} height={254} fetchPriority="high" />
@@ -29,13 +29,6 @@ export default async function EmbroideryPage({ params }: PageProps<'/[lang]/embr
       </section>
 
       <StitchDivider />
-
-      <section className="container section prose reveal" aria-labelledby="story-title">
-        <h2 id="story-title">{t.storyTitle}</h2>
-        {t.story.map((p) => (
-          <p key={p}>{p}</p>
-        ))}
-      </section>
 
       <section className="container section two-col">
         <div className="panel reveal">
@@ -59,7 +52,6 @@ export default async function EmbroideryPage({ params }: PageProps<'/[lang]/embr
       <section className="container section made" aria-labelledby="tradition-title">
         <figure className="reveal">
           <img className="photo" src="/img/bookmark.webp" alt={t.photoAlt} width={1200} height={688} loading="lazy" />
-          <figcaption>{t.photoCaption}</figcaption>
         </figure>
         <div className="prose reveal">
           <h2 id="tradition-title">{t.traditionTitle}</h2>

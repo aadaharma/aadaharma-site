@@ -24,7 +24,8 @@ export default async function PatternsPage({ params }: PageProps<'/[lang]/patter
     <>
       <section className="hero container">
         <div className="hero__text">
-          <p className="eyebrow">{t.eyebrow}</p>
+          {/* No eyebrow text; the empty line keeps the hero's spacing */}
+          <p className="eyebrow" />
           <h1>{t.title}</h1>
           <p className="lead">{t.lead}</p>
         </div>

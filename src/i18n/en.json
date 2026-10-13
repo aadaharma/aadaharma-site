@@ -22,7 +22,7 @@
     "metaTitle": "Aada Härmä — fibre arts web tools",
     "description": "Web tools for fibre arts: a Karelian embroidery pattern designer, a pattern library, and a knitting pattern generator on the way.",
     "title": "Tools for fibre arts: learn new techniques and plan your projects.",
-    "lead": "I'm Aada — an embroiderer, knitter and engineering student. I build small web tools that make pattern design easier and more accessible to everyone.",
+    "lead": "I'm Aada, also known as BoingoDuck on the internet. I am a fibre arts enthusiast and an engineering student. I build small web tools that make pattern design easier and more accessible to everyone.",
     "cta": "See the embroidery designer",
     "projectsTitle": "Projects",
     "embroideryCard": {
@@ -33,9 +33,9 @@
     },
     "knittingCard": {
       "tag": "In the works",
-      "title": "Knitting Pattern Generator",
+      "title": "Sweater Pattern Generator",
       "text": "Get a knitting pattern sized to your own gauge and measurements.",
-      "link": "Peek at the plans",
+      "link": "Read more",
       "mockupAlt": "Mockup of the knitting pattern generator: a colourwork star chart with a palette of two yarn colours"
     },
     "patternsCard": {
@@ -56,22 +56,14 @@
     }
   },
   "embroidery": {
-    "metaTitle": "Karelian Embroidery Designer — Aada Härmä",
+    "metaTitle": "Karelian Embroidery Designer",
     "description": "A free web tool for drafting Karelian embroidery patterns on a stitch grid and downloading them as a PDF.",
-    "eyebrow": "Project",
     "title": "Karelian Embroidery Designer",
     "lead": "A web tool for drafting Karelian embroidery patterns.",
     "cta": "Open the designer",
-    "ctaNote": "Free, and runs in your browser",
     "photoAlt": "An embroidered bookmark: white Karelian-style birds and spirals stitched on blue fabric",
-    "photoCaption": "Birds and spirals: a bookmark I embroidered.",
-    "storyTitle": "Why I built it",
-    "story": [
-      "The idea came from my own embroidery. When I started drafting my own patterns, I quickly noticed that there were no ready-made tools for Karelian embroidery pattern-making.",
-      "Drafting on paper is quick and easy, but I wanted a way to catalogue the patterns and motifs that are used again and again in Karelian embroidery."
-    ],
     "screenshotAlt": "Screenshot of the Karelian Embroidery Designer: a toolbar of stitch tools above a grid with a bird motif drawn in red",
-    "featuresTitle": "What it does",
+    "featuresTitle": "Current features",
     "features": [
       "Draw on a stitch grid with straight, diagonal and cross stitches",
       "Pick your thread colour",
@@ -79,20 +71,18 @@
       "Undo mistakes or start over with a clean grid",
       "Download the finished pattern as a PDF"
     ],
-    "plannedTitle": "What's next",
+    "plannedTitle": "To be added",
     "planned": [
       "Templates of traditional motifs to start from",
-      "Saving your own motifs as templates",
-      "Sharing patterns with other embroiderers"
+      "Saving your own motifs as templates"
     ],
     "traditionTitle": "About Karelian embroidery",
-    "tradition": "Karelian embroidery is a traditional counted-thread technique from Karelia. The stitches follow the threads of an even-weave fabric and build up geometric motifs: rhombuses, crosses, branches and birds, traditionally in red on white linen.",
+    "tradition": "Karelian embroidery is a traditional counted-thread technique from Karelia. The stitches follow the threads of an even-weave fabric and build up geometric motifs: rhombuses, crosses, branches and birds. Embroidery is traditionally in red on white linen.",
     "closingTitle": "Ready to draft your own pattern?"
   },
   "knitting": {
-    "metaTitle": "Knitting Pattern Generator — Aada Härmä",
+    "metaTitle": "Knitting Pattern Generator",
     "description": "An upcoming tool for designing knitting charts and patterns from measurements.",
-    "eyebrow": "Coming later",
     "title": "Knitting Pattern Generator",
     "lead": "A tool for designing your own projects based on your measurements and gauge.",
     "photoAlt": "A sock in progress on double-pointed needles, with a green and grey colourwork pattern",
@@ -104,8 +94,7 @@
       "Get a written pattern with your stitch and row counts worked out",
       "Print it or save it as a PDF to knit from"
     ],
-    "meanwhile": "In the meantime, browse my knitting patterns",
-    "photoCaption": "Socks in progress: the kind of project I want the tool to size for you."
+    "meanwhile": "In the meantime, browse my knitting patterns"
   },
   "theme": {
     "label": "Colour theme",
@@ -114,11 +103,10 @@
     "dark": "Dark"
   },
   "patterns": {
-    "metaTitle": "Knitting patterns — Aada Härmä",
+    "metaTitle": "Knitting patterns",
     "description": "Free knitting patterns written by Aada Härmä.",
-    "eyebrow": "Pattern library",
-    "title": "Knitting patterns",
-    "lead": "Patterns I've written and knitted myself.",
+    "title": "Knitting Pattern Library",
+    "lead": "A collection of my free knitting patterns.",
     "heroCaption": "Selbu star · 15 × 15 stitches",
     "listTitle": "All patterns",
     "filters": {
