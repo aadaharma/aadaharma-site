@@ -2,7 +2,7 @@
 
 import { useEffect, useState, type ReactNode } from 'react'
 import type { Strings } from '@/lib/i18n'
-import { calculateYoke, invalidFields, type Spacing, type Warning, type YokeInput, type YokeResult } from '@/lib/knitting/yoke'
+import { calculateYoke, invalidFields, LIMITS, type Spacing, type Warning, type YokeInput, type YokeResult } from '@/lib/knitting/yoke'
 
 type T = Strings['yoke']
 type Field = Exclude<keyof YokeInput, 'neckRaise'> | 'neckRaiseHeight'
@@ -23,6 +23,12 @@ const number = (text: string) => (text.trim() === '' ? Number.NaN : Number(text.
 
 const fill = (text: string, values: Record<string, string | number>) =>
   text.replace(/\{(\w+)\}/g, (_, name: string) => String(values[name] ?? ''))
+
+// A field's limits as the language writes them: 0,5 and −20 in Finnish
+function range(field: keyof YokeInput, lang: string) {
+  const format = (n: number) => n.toLocaleString(lang === 'fi' ? 'fi-FI' : 'en-GB')
+  return { min: format(LIMITS[field].min), max: format(LIMITS[field].max) }
+}
 
 function toInput(v: Values): YokeInput {
   return {
@@ -79,7 +85,7 @@ export function YokeCalculator({ t, lang }: { t: T; lang: string }) {
       )}
       {invalid.has(name) && (
         <span className="calc-error" id={`${name}-error`}>
-          {t.form.invalid}
+          {fill(t.form.invalid, range(name === 'neckRaiseHeight' ? 'neckRaise' : name, lang))}
         </span>
       )}
     </div>

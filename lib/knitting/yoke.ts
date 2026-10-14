@@ -32,6 +32,7 @@ export type Warning =
   | { kind: 'tooFewIncreases'; minimum: number } // the increase rounds don't fit into the yoke
   | { kind: 'increasesEveryRound' } // fits, but only by increasing on consecutive rounds
   | { kind: 'shortRowsDontFit' } // the back neck raise is too tall for the neck stitches
+  | { kind: 'moreIncreasesThanStitches' } // more increases in a round than there are stitches
 
 export type YokeResult = {
   castOn: number
@@ -74,20 +75,33 @@ export function intervals(rounds: number, count: number): Interval[] {
   ].filter((i) => i.times > 0 && i.every > 0)
 }
 
-// Checks the input; returns the names of fields that aren't usable numbers
+// The range each field accepts, generous enough for anything from a baby's sweater in
+// thick yarn to a roomy adult one in fine yarn. Lengths are in cm, gauges per 10 cm.
+export const LIMITS: Record<keyof YokeInput, { min: number; max: number }> = {
+  stitchGauge: { min: 5, max: 60 },
+  roundGauge: { min: 5, max: 80 },
+  neck: { min: 20, max: 100 },
+  bust: { min: 40, max: 200 },
+  bodyEase: { min: -20, max: 50 },
+  upperArm: { min: 10, max: 80 },
+  sleeveEase: { min: -10, max: 30 },
+  yokeLength: { min: 5, max: 50 },
+  bodyLength: { min: 1, max: 100 },
+  sleeveLength: { min: 1, max: 100 },
+  increasesPerRound: { min: 1, max: 150 },
+  underarm: { min: 0, max: 15 },
+  neckRaise: { min: 0.5, max: 10 },
+}
+
+// Checks the input; returns the fields that aren't numbers within their range
 export function invalidFields(input: YokeInput): (keyof YokeInput)[] {
-  const positive: (keyof YokeInput)[] = [
-    'stitchGauge', 'roundGauge', 'neck', 'bust', 'upperArm', 'yokeLength', 'bodyLength', 'sleeveLength', 'increasesPerRound',
-  ]
-  const zeroOrMore: (keyof YokeInput)[] = ['underarm']
-  const bad = positive.filter((k) => !(Number.isFinite(input[k]) && (input[k] as number) > 0))
-  bad.push(...zeroOrMore.filter((k) => !(Number.isFinite(input[k]) && (input[k] as number) >= 0)))
-  // Ease can be negative (a close fit), but not so much that nothing is left
-  if (!Number.isFinite(input.bodyEase) || input.bust + input.bodyEase <= 0) bad.push('bodyEase')
-  if (!Number.isFinite(input.sleeveEase) || input.upperArm + input.sleeveEase <= 0) bad.push('sleeveEase')
-  if (!Number.isInteger(input.increasesPerRound)) bad.push('increasesPerRound')
-  if (input.neckRaise !== null && !(Number.isFinite(input.neckRaise) && input.neckRaise > 0)) bad.push('neckRaise')
-  return [...new Set(bad)]
+  return (Object.keys(LIMITS) as (keyof YokeInput)[]).filter((k) => {
+    const value = input[k]
+    if (k === 'neckRaise' && value === null) return false
+    const { min, max } = LIMITS[k]
+    if (typeof value !== 'number' || !Number.isFinite(value) || value < min || value > max) return true
+    return k === 'increasesPerRound' && !Number.isInteger(value)
+  })
 }
 
 export function calculateYoke(input: YokeInput): YokeResult {
@@ -111,6 +125,7 @@ export function calculateYoke(input: YokeInput): YokeResult {
   if (toAdd <= 0) warnings.push({ kind: 'neckTooBig' })
   else if (count > yokeRounds) warnings.push({ kind: 'tooFewIncreases', minimum: Math.ceil(toAdd / yokeRounds) })
   else if (count > yokeRounds / 2) warnings.push({ kind: 'increasesEveryRound' })
+  if (toAdd > 0 && Math.min(perRound, toAdd) > castOn) warnings.push({ kind: 'moreIncreasesThanStitches' })
 
   // Where the increase rounds fall: each stretch of the yoke ends in one. If they don't
   // fit, they're listed one per round so the numbers still add up.
