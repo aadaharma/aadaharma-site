@@ -1,6 +1,7 @@
 // Working with parts of a pattern: what a selection holds, moving, mirroring and
 // rotating it. A region is a rectangle of cells; a stitch is in it if both its
 // ends are on or inside the rectangle's border.
+import type { Pattern } from './pattern'
 import { endpoints, stitchBetween, type Key, type Point, type Stitches } from './stitches'
 
 export type Region = { x: number; y: number; width: number; height: number }
@@ -64,4 +65,28 @@ export function bounds(stitches: Stitches): Region | null {
   if (minX === Infinity) return null
   // A region is counted in cells; a lone vertical or horizontal line still takes one
   return { x: minX, y: minY, width: Math.max(1, maxX - minX), height: Math.max(1, maxY - minY) }
+}
+
+// Selection actions on a pattern, each one undo step
+
+export function recolourRegion(pattern: Pattern, r: Region, colour: string) {
+  pattern.edit(() => {
+    for (const k of [...pattern.stitches.keys()]) if (inRegion(k, r)) pattern.set(k, colour)
+  })
+}
+
+export function clearRegion(pattern: Pattern, r: Region) {
+  pattern.edit(() => {
+    for (const k of [...pattern.stitches.keys()]) if (inRegion(k, r)) pattern.set(k, undefined)
+  })
+}
+
+// Lifts what's in the region, changes it with fn (e.g. mirrors it) and puts it back
+// moved by (dx, dy). Whatever was under the new spot is stitched over, not removed.
+export function rework(pattern: Pattern, r: Region, fn: (piece: Stitches) => Stitches = (p) => p, dx = 0, dy = 0) {
+  pattern.edit(() => {
+    const piece = fn(extract(pattern.stitches, r))
+    clearRegion(pattern, r)
+    for (const [k, colour] of translate(piece, r.x + dx, r.y + dy)) pattern.set(k, colour)
+  })
 }

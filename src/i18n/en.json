@@ -145,5 +145,110 @@
     "back": "Back to the home page",
     "fiText": "Sivua ei löytynyt.",
     "fiBack": "Etusivulle"
+  },
+  "designer": {
+    "metaTitle": "Karelian Embroidery Designer",
+    "description": "Draw Karelian embroidery patterns on a stitch grid: drag along the grid lines, use traditional motifs as templates and download your pattern as a picture.",
+    "title": "Karelian Embroidery Designer",
+    "home": "Back to aadaharma.com",
+    "canvas": "Embroidery grid",
+    "tools": {
+      "label": "Tools",
+      "pen": "Pen (P)",
+      "shape": "Cell shapes (S)",
+      "erase": "Eraser (E)",
+      "select": "Select (V)",
+      "pan": "Hand: move around (H, or hold Space)"
+    },
+    "undo": "Undo (Ctrl+Z)",
+    "redo": "Redo (Ctrl+Shift+Z)",
+    "clear": "Clear the grid",
+    "download": "Download as PNG",
+    "zoomIn": "Zoom in (+)",
+    "zoomOut": "Zoom out (−)",
+    "fit": "Fit the grid to the view",
+    "openPanel": "Colours, templates and grid size",
+    "closePanel": "Close",
+    "pen": {
+      "title": "Pen",
+      "hint": "Drag along the grid lines or diagonals; the pen follows the holes in the linen. Tap a line to add or remove one stitch."
+    },
+    "shape": {
+      "title": "Cell shapes",
+      "hint": "Click a cell, or drag across cells to stitch a row.",
+      "names": {
+        "square": "Square",
+        "cross": "Cross",
+        "diag-left": "Diagonal \\",
+        "diag-right": "Diagonal /",
+        "line-left": "Left edge",
+        "line-right": "Right edge",
+        "line-top": "Top edge",
+        "line-bottom": "Bottom edge"
+      }
+    },
+    "erase": {
+      "title": "Eraser",
+      "hint": "Drag over stitches to unpick them."
+    },
+    "pan": {
+      "title": "Hand",
+      "hint": "Drag to move around the grid. With any tool, hold Space or use the scrollbars."
+    },
+    "select": {
+      "title": "Select",
+      "hint": "Drag a rectangle over the grid. Then drag inside it to move it, or use the buttons. Esc clears the selection.",
+      "selection": "Selection",
+      "size": "{w} × {h} cells · {n} stitches",
+      "recolour": "Recolour",
+      "delete": "Delete",
+      "copy": "Copy",
+      "paste": "Paste",
+      "mirrorH": "Mirror ↔",
+      "mirrorV": "Mirror ↕",
+      "moveHint": "Drag inside the dashed box to move it, or use the arrow keys."
+    },
+    "placing": {
+      "title": "Placing: {name}",
+      "paste": "Pasting",
+      "size": "{w} × {h} cells",
+      "rotate": "Turn 90°",
+      "mirrorH": "Mirror ↔",
+      "mirrorV": "Mirror ↕",
+      "done": "Done",
+      "hint": "Click the grid to place it. R turns it, Esc stops.",
+      "templateHint": "Click the grid to place it, as many times as you like. R turns it, Esc stops."
+    },
+    "colour": {
+      "title": "Thread colour",
+      "custom": "Other colour",
+      "names": {
+        "#bd0603": "Karelian red",
+        "#1f1a17": "Black",
+        "#1f3a6b": "Dark blue",
+        "#3d6b2a": "Green",
+        "#c08a1e": "Ochre",
+        "#6b2a12": "Madder brown"
+      }
+    },
+    "templates": {
+      "title": "Templates",
+      "hint": "Pick a motif, then click the grid to place it. You can turn or mirror it first.",
+      "size": "{w} × {h}"
+    },
+    "grid": {
+      "title": "Grid size",
+      "width": "Width",
+      "height": "Height",
+      "apply": "Apply",
+      "hint": "4 to 200 cells. Stitches outside a smaller grid are removed, and undo starts over."
+    },
+    "toast": {
+      "copied": "Copied. Paste places a copy.",
+      "cleared": "The grid is cleared.",
+      "undo": "Undo",
+      "resized": "The grid is now {w} × {h} cells.",
+      "empty": "The grid is already empty."
+    }
   }
 }

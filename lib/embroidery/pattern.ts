@@ -11,11 +11,22 @@ export class Pattern {
   private undoStack: Step[] = []
   private redoStack: Step[] = []
   private step: Step | null = null
+  private listeners = new Set<() => void>()
 
   constructor(
     public width: number,
     public height: number,
   ) {}
+
+  // Calls fn after every change; returns a function that stops it
+  subscribe(fn: () => void) {
+    this.listeners.add(fn)
+    return () => void this.listeners.delete(fn)
+  }
+
+  private changed() {
+    for (const fn of this.listeners) fn()
+  }
 
   // Starts a step; edits until end() are undone together
   begin() {
@@ -24,11 +35,13 @@ export class Pattern {
   }
 
   end() {
-    if (this.step?.size) {
-      this.undoStack.push(this.step)
-      this.redoStack = []
-    }
+    const step = this.step
     this.step = null
+    if (step?.size) {
+      this.undoStack.push(step)
+      this.redoStack = []
+      this.changed()
+    }
   }
 
   // Sets a stitch's colour, or removes it with undefined. Stitches outside the grid
@@ -44,6 +57,22 @@ export class Pattern {
     if (colour === undefined) this.stitches.delete(k)
     else this.stitches.set(k, colour)
     if (own) this.end()
+    this.changed()
+  }
+
+  // Takes back the edits of the step in progress (e.g. a drag cut off by a second finger)
+  cancel() {
+    const step = this.step
+    this.step = null
+    if (!step?.size) return
+    for (const [k, { before }] of step) this.write(k, before)
+    this.changed()
+  }
+
+  clear() {
+    this.edit(() => {
+      for (const k of [...this.stitches.keys()]) this.set(k, undefined)
+    })
   }
 
   // Several edits as one step (or as part of the current one)
@@ -68,6 +97,7 @@ export class Pattern {
     if (!step) return
     for (const [k, { before }] of step) this.write(k, before)
     this.redoStack.push(step)
+    this.changed()
   }
 
   redo() {
@@ -76,6 +106,7 @@ export class Pattern {
     if (!step) return
     for (const [k, { after }] of step) this.write(k, after)
     this.undoStack.push(step)
+    this.changed()
   }
 
   private write(k: Key, colour: string | undefined) {
@@ -92,5 +123,6 @@ export class Pattern {
     for (const k of [...this.stitches.keys()]) if (!inGrid(k, width, height)) this.stitches.delete(k)
     this.undoStack = []
     this.redoStack = []
+    this.changed()
   }
 }

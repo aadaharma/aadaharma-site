@@ -1,15 +1,15 @@
 import { AppFrame, Star, StitchDivider } from '@/components/decorations'
-import { getStrings, type Lang } from '@/lib/i18n'
+import { designerUrl, getStrings, type Lang } from '@/lib/i18n'
 import { pageMetadata } from '@/lib/metadata'
 
-const DESIGNER_URL = 'https://aadaharma.com/karelianembroiderymaker/'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/embroidery'>) {
   return pageMetadata((await params).lang as Lang, 'embroidery')
 }
 
 export default async function EmbroideryPage({ params }: PageProps<'/[lang]/embroidery'>) {
-  const t = getStrings((await params).lang as Lang).embroidery
+  const lang = (await params).lang as Lang
+  const t = getStrings(lang).embroidery
 
   return (
     <>
@@ -19,7 +19,7 @@ export default async function EmbroideryPage({ params }: PageProps<'/[lang]/embr
           <p className="eyebrow" />
           <h1>{t.title}</h1>
           <p className="lead">{t.lead}</p>
-          <a className="button" href={DESIGNER_URL}>
+          <a className="button" href={designerUrl(lang)}>
             {t.cta} <span aria-hidden="true">↗</span>
           </a>
         </div>
@@ -62,7 +62,7 @@ export default async function EmbroideryPage({ params }: PageProps<'/[lang]/embr
       <section className="container section closing reveal">
         <Star size={64} />
         <h2>{t.closingTitle}</h2>
-        <a className="button" href={DESIGNER_URL}>
+        <a className="button" href={designerUrl(lang)}>
           {t.cta} <span aria-hidden="true">↗</span>
         </a>
       </section>

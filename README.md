@@ -35,7 +35,8 @@ npx vercel env pull .env.local
 
 - `app/[lang]/` holds the pages. English pages have no prefix (`/patterns/`) and
   Finnish ones start with `/fi/`; `proxy.ts` maps the English addresses onto `app/[lang]`
-  and redirects `/en/...` to the unprefixed address.
+  and redirects `/en/...` to the unprefixed address. The site pages are in `app/[lang]/(site)/`,
+  whose layout adds the header and footer; the embroidery designer is next to it.
 - `app/global-not-found.tsx` is the 404 page.
 - `components/` holds the shared markup: `SiteDocument` (the page around the content),
   `Header`, `Footer`, decorations, and the small interactive parts (theme toggle,
@@ -48,6 +49,20 @@ npx vercel env pull .env.local
 
 To add a page, add its name to `PAGES` in `lib/i18n.ts`, create
 `app/[lang]/<page>/page.tsx` (copy an existing one), and add its strings to both JSON files.
+
+## Karelian Embroidery Designer
+
+The designer is at `/karelianembroiderymaker/` (and `/fi/karelianembroiderymaker/`):
+
+- `lib/embroidery/` is the pattern model, with no browser code: stitches, the cell
+  shapes, selections, undo/redo and templates. `npm test` runs its tests.
+- `components/embroidery/editor.ts` is the canvas: drawing, dragging, zooming and
+  scrolling. `Designer.tsx` is the page around it, and `src/styles/designer.css` its look.
+- The templates are in `lib/embroidery/motifs.ts` for now.
+- The drawing is kept in the browser (localStorage), so reloading doesn't lose it.
+
+It replaces the old designer, which was its own repo (aadaharma/karelianembroiderymaker)
+and Vercel project.
 
 ## Knitting patterns
 

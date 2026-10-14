@@ -22,3 +22,6 @@ export const pageUrl = (lang: Lang, page: Page) =>
   (lang === 'en' ? '' : `/${lang}`) + (page === 'home' ? '/' : `/${page}/`)
 
 export const patternUrl = (lang: Lang, slug: string) => `${pageUrl(lang, 'patterns')}${slug}/`
+
+// The embroidery designer, which has its own layout (app/[lang]/karelianembroiderymaker)
+export const designerUrl = (lang: Lang) => (lang === 'en' ? '' : `/${lang}`) + '/karelianembroiderymaker/'

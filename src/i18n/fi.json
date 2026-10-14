@@ -49,8 +49,8 @@
       "title": "Minusta",
       "paragraphs": [
         "Valmistuin hiljattain tekniikan kandidaatiksi ja jatkan nyt opintojani diplomi-insinöörin tutkinto-ohjelmassa Tampereen yliopistossa. Pääaineeni on tietoliikennetekniikka ja sivuaineeni taloustiede.",
-            "Tekniikan lisäksi harrastan kaikenlaisia kädentaitoja neulomisesta puunveistoon. Tämä sivusto on harrastusprojektini, jossa yhdistän teknisen osaamiseni ja intohimoni kädentaitoihin."
-          ],
+        "Tekniikan lisäksi harrastan kaikenlaisia kädentaitoja neulomisesta puunveistoon. Tämä sivusto on harrastusprojektini, jossa yhdistän teknisen osaamiseni ja intohimoni kädentaitoihin."
+      ],
       "portraitAlt": "Aadan muotokuva"
     }
   },
@@ -143,5 +143,110 @@
     "back": "Etusivulle",
     "fiText": "Sivua ei löytynyt.",
     "fiBack": "Etusivulle"
+  },
+  "designer": {
+    "metaTitle": "Karjalaisen kirjonnan suunnittelija",
+    "description": "Piirrä karjalaisen kirjonnan malleja pistoruudukolle: vedä pitkin ruudukon viivoja, käytä perinteisiä kuvioita pohjina ja lataa malli kuvana.",
+    "title": "Karjalaisen kirjonnan suunnittelija",
+    "home": "Takaisin aadaharma.comiin",
+    "canvas": "Kirjontaruudukko",
+    "tools": {
+      "label": "Työkalut",
+      "pen": "Kynä (P)",
+      "shape": "Ruutukuviot (S)",
+      "erase": "Pyyhin (E)",
+      "select": "Valinta (V)",
+      "pan": "Käsi: liiku ruudukolla (H tai pidä välilyöntiä pohjassa)"
+    },
+    "undo": "Kumoa (Ctrl+Z)",
+    "redo": "Tee uudelleen (Ctrl+Shift+Z)",
+    "clear": "Tyhjennä ruudukko",
+    "download": "Lataa PNG-kuvana",
+    "zoomIn": "Lähennä (+)",
+    "zoomOut": "Loitonna (−)",
+    "fit": "Sovita ruudukko näkymään",
+    "openPanel": "Värit, mallit ja ruudukon koko",
+    "closePanel": "Sulje",
+    "pen": {
+      "title": "Kynä",
+      "hint": "Vedä pitkin ruudukon viivoja tai vinottain; kynä seuraa kankaan reikiä. Napauta viivaa lisätäksesi tai poistaaksesi yhden piston."
+    },
+    "shape": {
+      "title": "Ruutukuviot",
+      "hint": "Napsauta ruutua tai vedä ruutujen yli ommellaksesi rivin.",
+      "names": {
+        "square": "Neliö",
+        "cross": "Risti",
+        "diag-left": "Vinoviiva \\",
+        "diag-right": "Vinoviiva /",
+        "line-left": "Vasen reuna",
+        "line-right": "Oikea reuna",
+        "line-top": "Yläreuna",
+        "line-bottom": "Alareuna"
+      }
+    },
+    "erase": {
+      "title": "Pyyhin",
+      "hint": "Vedä pistojen yli purkaaksesi ne."
+    },
+    "pan": {
+      "title": "Käsi",
+      "hint": "Vedä liikkuaksesi ruudukolla. Minkä tahansa työkalun kanssa voit pitää välilyöntiä pohjassa tai käyttää vierityspalkkeja."
+    },
+    "select": {
+      "title": "Valinta",
+      "hint": "Vedä suorakulmio ruudukon päälle. Vedä sen sisältä siirtääksesi sitä, tai käytä painikkeita. Esc poistaa valinnan.",
+      "selection": "Valinta",
+      "size": "{w} × {h} ruutua · {n} pistoa",
+      "recolour": "Vaihda väri",
+      "delete": "Poista",
+      "copy": "Kopioi",
+      "paste": "Liitä",
+      "mirrorH": "Peilaa ↔",
+      "mirrorV": "Peilaa ↕",
+      "moveHint": "Vedä katkoviivan sisältä siirtääksesi, tai käytä nuolinäppäimiä."
+    },
+    "placing": {
+      "title": "Sijoitetaan: {name}",
+      "paste": "Liitetään",
+      "size": "{w} × {h} ruutua",
+      "rotate": "Käännä 90°",
+      "mirrorH": "Peilaa ↔",
+      "mirrorV": "Peilaa ↕",
+      "done": "Valmis",
+      "hint": "Napsauta ruudukkoa sijoittaaksesi. R kääntää, Esc lopettaa.",
+      "templateHint": "Napsauta ruudukkoa sijoittaaksesi, niin monta kertaa kuin haluat. R kääntää, Esc lopettaa."
+    },
+    "colour": {
+      "title": "Langan väri",
+      "custom": "Muu väri",
+      "names": {
+        "#bd0603": "Karjalanpunainen",
+        "#1f1a17": "Musta",
+        "#1f3a6b": "Tummansininen",
+        "#3d6b2a": "Vihreä",
+        "#c08a1e": "Okra",
+        "#6b2a12": "Krapinruskea"
+      }
+    },
+    "templates": {
+      "title": "Mallit",
+      "hint": "Valitse kuvio ja napsauta ruudukkoa sijoittaaksesi sen. Voit kääntää tai peilata sen ensin.",
+      "size": "{w} × {h}"
+    },
+    "grid": {
+      "title": "Ruudukon koko",
+      "width": "Leveys",
+      "height": "Korkeus",
+      "apply": "Käytä",
+      "hint": "4–200 ruutua. Pienemmän ruudukon ulkopuolelle jäävät pistot poistetaan, ja kumoaminen alkaa alusta."
+    },
+    "toast": {
+      "copied": "Kopioitu. Liitä sijoittaa kopion.",
+      "cleared": "Ruudukko on tyhjennetty.",
+      "undo": "Kumoa",
+      "resized": "Ruudukko on nyt {w} × {h} ruutua.",
+      "empty": "Ruudukko on jo tyhjä."
+    }
   }
 }
