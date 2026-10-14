@@ -4,11 +4,11 @@
 .designer,
 .template-editor {
   --line-strong: #c3bca4;
-  --hover: rgb(110 32 24 / 0.08);
+  --hover: rgb(142 68 88 / 0.08);
   /* The canvas reads these (components/embroidery/editor.ts) */
   --ke-surround: #e3e1d6;
   --ke-fabric: #fcf9f2;
-  --ke-accent: #6e2018;
+  --ke-accent: #8e4458;
   --ke-shadow: rgb(40 35 10 / 0.22);
 }
 
