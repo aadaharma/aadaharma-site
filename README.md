@@ -2,7 +2,8 @@
 
 Aada Härmä's craft site: a showcase of the
 [Karelian Embroidery Designer](https://aadaharma.com/karelianembroiderymaker/),
-a library of knitting patterns, and later a knitting pattern generator.
+a library of knitting patterns with an admin page for adding them, and later a knitting
+pattern generator.
 The site is in English and Finnish.
 
 Built with [Next.js](https://nextjs.org/) (App Router) and plain CSS, hosted on
@@ -60,8 +61,23 @@ Pattern text is Markdown. A colourwork chart can be typed as text in a
 ```` ```chart ```` block (`X` = main colour, `.` = contrast colour); it's drawn as a
 numbered chart.
 
-An admin page for uploading patterns is on the way. Until then, patterns are written
-as Markdown files and imported:
+### The admin page
+
+Patterns are added and edited at [aadaharma.com/admin/](https://aadaharma.com/admin/):
+fill in the form, upload a cover photo and PDF, and tick "Published" when it's ready.
+Saving updates the site straight away; drafts can be checked with "Preview" first.
+Photos and PDFs go from the browser straight to Vercel Blob (up to 25 MB each).
+
+The admin is in `app/admin/` with its own layout (English only, not indexed by search
+engines) and is left out of `proxy.ts`. Login is one password (`lib/admin/session.ts`):
+it needs `ADMIN_PASSWORD` (at least 20 characters; use a password manager to make a random
+one) and `ADMIN_SESSION_SECRET` (at least 32 characters, e.g. `openssl rand -base64 32`).
+Changing either one logs out every browser. After 5 wrong passwords from one address,
+that address has to wait 15 minutes.
+
+### Importing Markdown files
+
+Patterns can also be written as Markdown files and imported:
 
 1. Copy `content/patterns/_template.md` and fill in the details at the top.
    The file name becomes the slug.
@@ -93,4 +109,6 @@ get a preview address. Environment variables are set in the Vercel project:
 |---|---|
 | `DATABASE_URL` | the Neon integration |
 | `BLOB_READ_WRITE_TOKEN` | the Blob store |
+| `ADMIN_PASSWORD` | you: the admin password, 20+ characters |
+| `ADMIN_SESSION_SECRET` | you: a random string, 32+ characters |
 | `NEXT_PUBLIC_SITE_URL` | optional, defaults to `https://aadaharma.com` (used for canonical links) |

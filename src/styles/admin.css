@@ -1,0 +1,245 @@
+/* The admin pages (app/admin): forms and the pattern list, in the site's colours */
+.admin {
+  padding-block: 2.5rem 4rem;
+}
+
+.admin h1 {
+  font-size: clamp(2rem, 1.6rem + 2vw, 2.8rem);
+}
+
+.admin code {
+  font-size: 0.9em;
+  padding: 0 0.25em;
+  border-radius: 3px;
+  background: var(--chrome);
+}
+
+button.button {
+  border: 0;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.admin-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.admin-title__links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.admin-notice {
+  padding: 0.75rem 1rem;
+  border: 1.5px dashed var(--olive);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.admin-notice--error {
+  border-color: var(--rust);
+}
+
+/* Pattern list */
+.admin-list {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.admin-list li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-block: 0.85rem;
+  border-top: 1.5px dashed var(--line);
+}
+
+.admin-list img,
+.admin-list__blank {
+  flex: none;
+  width: 4rem;
+  height: 4rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+  background: var(--chrome);
+}
+
+.admin-list__title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+}
+
+.admin-list__meta {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.admin-list__meta .tag {
+  margin: 0 0.5rem 0 0;
+}
+
+/* Forms */
+.admin-login {
+  max-width: 26rem;
+}
+
+.admin-form {
+  display: grid;
+  gap: 1.5rem;
+  max-width: 48rem;
+}
+
+.admin-form fieldset {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 1.25rem;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.admin-form legend {
+  padding-inline: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--rust);
+}
+
+.admin-form .note {
+  margin: 0;
+}
+
+.field {
+  display: grid;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.field > label,
+.field__label {
+  font-weight: 600;
+}
+
+.field input:not([type='checkbox']),
+.field select,
+.field textarea {
+  width: 100%;
+  padding: 0.55rem 0.7rem;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--linen);
+  color: var(--ink);
+  font: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+}
+
+.field textarea#bodyMd {
+  font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.field input:focus-visible,
+.field select:focus-visible,
+.field textarea:focus-visible {
+  outline: 2px dashed var(--rust);
+  outline-offset: 2px;
+}
+
+.field [aria-invalid='true'] {
+  border-color: var(--rust);
+}
+
+.field__hint,
+.field__error {
+  margin: 0;
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.field__error {
+  color: var(--rust);
+  font-weight: 600;
+}
+
+.field-row {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+}
+
+.field-row--3 {
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+}
+
+.file-upload__preview {
+  max-width: 14rem;
+  max-height: 14rem;
+  object-fit: cover;
+  border-radius: var(--radius);
+}
+
+.admin-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.admin-actions .pill {
+  padding: 0.3rem 0.85rem;
+}
+
+.admin-save {
+  position: sticky;
+  bottom: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius);
+  background: var(--chrome);
+  box-shadow: var(--shadow);
+}
+
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--rust);
+}
+
+.admin-delete {
+  margin-top: 3rem;
+}
+
+/* Preview: the pattern page sits inside the admin's container */
+.admin .pattern.container {
+  width: auto;
+}
+
+.admin-preview-bar {
+  margin-bottom: 2rem;
+}

@@ -83,7 +83,7 @@ function fromMarkdown(): Pattern[] {
     })
 }
 
-function fromRow(row: PatternRow): Pattern {
+export function fromRow(row: PatternRow): Pattern {
   const lang = isLang(row.language) ? row.language : 'en'
   return {
     slug: row.slug,
