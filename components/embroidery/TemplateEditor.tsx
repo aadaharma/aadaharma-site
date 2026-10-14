@@ -115,6 +115,10 @@ export function TemplateEditor({ id, initial, motif, t }: Props) {
             <input type="checkbox" name="published" defaultChecked={values.published} />
             Published (in the designer)
           </label>
+          <label className="check">
+            <input type="checkbox" name="pageBorder" defaultChecked={values.pageBorder} />
+            Page border (down both edges of every page)
+          </label>
           <button type="submit" className="button" disabled={pending}>
             {pending ? 'Saving…' : 'Save'}
           </button>

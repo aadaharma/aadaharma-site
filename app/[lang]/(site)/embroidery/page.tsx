@@ -1,4 +1,4 @@
-import { AppFrame, Star, StitchDivider } from '@/components/decorations'
+import { AppFrame, Star } from '@/components/decorations'
 import { designerUrl, getStrings, type Lang } from '@/lib/i18n'
 import { pageMetadata } from '@/lib/metadata'
 
@@ -28,7 +28,6 @@ export default async function EmbroideryPage({ params }: PageProps<'/[lang]/embr
         </AppFrame>
       </section>
 
-      <StitchDivider />
 
       <section className="container section two-col">
         <div className="panel reveal">

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { motifFrom, motifFromJson, motifToJson, placeMotif, TEMPLATE_MAX } from './motif'
+import { borderMask, borderSvg } from './border'
 import { BUILT_IN_TEMPLATES, isCategory } from './motifs'
 import { Pattern } from './pattern'
 import {
@@ -228,4 +229,13 @@ test('templates can be taller than designs', () => {
   assert.ok(motifFromJson(tall, TEMPLATE_MAX))
   assert.equal(motifFromJson({ ...tall, height: 401 }, TEMPLATE_MAX), null)
   assert.equal(motifFromJson({ ...tall, width: 201 }, TEMPLATE_MAX), null)
+})
+
+test('the page border draws every stitch, a little short of its grid points', () => {
+  const svg = borderSvg({ width: 2, height: 3, stitches: { [RED]: ['h:0,0', 'v:0,0', 'd:1,1'] } })
+  assert.match(svg, /viewBox="-0\.3 0 2\.6 3"/)
+  assert.equal(svg.match(/M/g)?.length, 3)
+  assert.ok(svg.includes('M0.1 0L0.9 0'))
+  assert.ok(svg.includes('M0 0.1L0 0.9'))
+  assert.ok(borderMask({ width: 1, height: 1, stitches: {} }).startsWith('url("data:image/svg+xml,'))
 })

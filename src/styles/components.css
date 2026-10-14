@@ -13,19 +13,6 @@
   flex: none;
 }
 
-.stitch-divider {
-  height: 24px;
-  margin-block: var(--space) 0;
-  color: var(--line);
-  background-color: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='24'%3E%3Cpath d='M0 12H10L20 2L30 12H40M10 12L20 22L30 12M20 7V17M15 12H25' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='4 2.5'/%3E%3C/svg%3E") center / 40px 24px repeat-x;
-  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='24'%3E%3Cpath d='M0 12H10L20 2L30 12H40M10 12L20 22L30 12M20 7V17M15 12H25' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' stroke-dasharray='4 2.5'/%3E%3C/svg%3E") center / 40px 24px repeat-x;
-}
-
-.hero + .stitch-divider {
-  color: var(--saffron-soft);
-}
-
 /* Header */
 .site-header__inner {
   width: min(100% - 2 * var(--gutter), var(--max-width));
@@ -386,10 +373,6 @@ figcaption {
 .site-footer {
   margin-top: var(--space);
   padding-bottom: 2rem;
-}
-
-.site-footer .stitch-divider {
-  margin-top: 0;
 }
 
 .site-footer__inner {

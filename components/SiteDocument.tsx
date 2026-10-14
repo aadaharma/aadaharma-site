@@ -2,6 +2,7 @@ import type { ReactNode } from 'react'
 import { getStrings, type Lang } from '@/lib/i18n'
 import { Footer } from './Footer'
 import { Header } from './Header'
+import { PageBorder } from './PageBorder'
 import { Reveal } from './Reveal'
 import { themeScript } from './ThemeToggle'
 
@@ -15,7 +16,7 @@ export function Document({ lang, children }: { lang: Lang; children: ReactNode }
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link rel="icon" href="/favicon.ico" />
-        <link rel="preload" href="/fonts/YesevaOne-Regular.woff" as="font" type="font/woff" crossOrigin="" />
+        <link rel="preload" href="/fonts/YoungSerif-Regular.woff2" as="font" type="font/woff2" crossOrigin="" />
         <link rel="preload" href="/fonts/WorkSans-Regular.woff" as="font" type="font/woff" crossOrigin="" />
       </head>
       <body>{children}</body>
@@ -35,6 +36,7 @@ export function SiteChrome({ lang, children }: { lang: Lang; children: ReactNode
       <main id="main">{children}</main>
       <Footer t={t.footer} />
       <Reveal />
+      <PageBorder />
     </>
   )
 }

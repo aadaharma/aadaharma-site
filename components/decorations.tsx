@@ -8,10 +8,6 @@ export function Star({ size }: { size: number }) {
   )
 }
 
-export function StitchDivider() {
-  return <div className="stitch-divider" aria-hidden="true" />
-}
-
 // Browser window drawn around app screenshots and mockups. The CSS sizes the screen's
 // direct img/svg child, so SVG strings from lib/knit-art.ts go in `svg`, not in a wrapper.
 type AppFrameProps = { url: string } & ({ children: ReactNode; svg?: never } | { svg: string; children?: never })

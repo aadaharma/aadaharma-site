@@ -1,4 +1,4 @@
-import { AppFrame, StitchDivider } from '@/components/decorations'
+import { AppFrame } from '@/components/decorations'
 import { PatternLibrary, type PatternCard } from '@/components/PatternLibrary'
 import { getStrings, type Lang } from '@/lib/i18n'
 import { starPair } from '@/lib/knit-art'
@@ -32,7 +32,6 @@ export default async function PatternsPage({ params }: PageProps<'/[lang]/patter
         <AppFrame url={t.heroCaption} svg={starPair()} />
       </section>
 
-      <StitchDivider />
 
       <section className="container section" aria-labelledby="library-title">
         <h2 id="library-title" className="visually-hidden">

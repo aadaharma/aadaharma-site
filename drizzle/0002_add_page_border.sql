@@ -1,0 +1,1 @@
+ALTER TABLE "templates" ADD COLUMN "page_border" boolean DEFAULT false NOT NULL;

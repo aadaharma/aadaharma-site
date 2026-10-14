@@ -1,4 +1,4 @@
-import { AppFrame, StitchDivider } from '@/components/decorations'
+import { AppFrame } from '@/components/decorations'
 import { getStrings, pageUrl, yokeUrl, type Lang } from '@/lib/i18n'
 import { knitMockup } from '@/lib/knit-art'
 import { pageMetadata } from '@/lib/metadata'
@@ -27,7 +27,6 @@ export default async function KnittingPage({ params }: PageProps<'/[lang]/knitti
         <AppFrame url="aadaharma.com/knitting" svg={knitMockup(strings.home.knittingCard.mockupAlt)} />
       </section>
 
-      <StitchDivider />
 
       <section className="container section made" aria-labelledby="plans-title">
         <figure className="reveal">

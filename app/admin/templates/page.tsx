@@ -57,6 +57,7 @@ export default async function TemplatesPage({ searchParams }: PageProps<'/admin/
                       <span className={row.published ? 'tag tag--ready' : 'tag tag--soon'}>
                         {row.published ? 'Published' : 'Draft'}
                       </span>
+                      {row.pageBorder && <span className="tag tag--ready">Page border</span>}
                       <span lang="fi">{row.nameFi}</span> · {row.width} × {row.height}
                     </p>
                   </div>

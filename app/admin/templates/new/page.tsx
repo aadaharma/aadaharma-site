@@ -14,7 +14,7 @@ export default async function NewTemplatePage() {
       <h1>New template</h1>
       <TemplateEditor
         id={null}
-        initial={{ nameEn: '', nameFi: '', category: CATEGORIES[0].id, published: false }}
+        initial={{ nameEn: '', nameFi: '', category: CATEGORIES[0].id, published: false, pageBorder: false }}
         motif={null}
         t={getStrings('en').designer}
       />

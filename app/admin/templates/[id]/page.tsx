@@ -28,11 +28,12 @@ export default async function EditTemplatePage({ params, searchParams }: PagePro
       {saved && (
         <p className="admin-notice" role="status">
           Saved. {row.published ? 'The designer is updated.' : 'It’s a draft, so it isn’t in the designer yet.'}
+          {row.pageBorder && ' It’s the page border, so the site pages are updated too.'}
         </p>
       )}
       <TemplateEditor
         id={id}
-        initial={{ nameEn: row.nameEn, nameFi: row.nameFi, category: row.category, published: row.published }}
+        initial={{ nameEn: row.nameEn, nameFi: row.nameFi, category: row.category, published: row.published, pageBorder: row.pageBorder }}
         motif={rowToTemplate(row).motif}
         t={getStrings('en').designer}
       />
