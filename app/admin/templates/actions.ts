@@ -6,7 +6,7 @@ import { redirect } from 'next/navigation'
 import { requireAdmin } from '@/lib/admin/session'
 import { db } from '@/lib/db'
 import { templates } from '@/lib/db/schema'
-import { motifFrom, motifFromJson, motifToJson } from '@/lib/embroidery/motif'
+import { motifFrom, motifFromJson, motifToJson, TEMPLATE_MAX } from '@/lib/embroidery/motif'
 import { isCategory } from '@/lib/embroidery/motifs'
 
 export type TemplateFields = { nameEn: string; nameFi: string; category: string; published: boolean }
@@ -32,7 +32,7 @@ export async function saveTemplate(_: TemplateSaveState, form: FormData): Promis
   // The drawing, trimmed to its stitches
   let motif = null
   try {
-    const drawn = motifFromJson(JSON.parse(String(form.get('motif') ?? 'null')))
+    const drawn = motifFromJson(JSON.parse(String(form.get('motif') ?? 'null')), TEMPLATE_MAX)
     motif = drawn && motifFrom(drawn.stitches)
   } catch {}
 

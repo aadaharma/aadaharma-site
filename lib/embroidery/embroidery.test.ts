@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { motifFrom, motifFromJson, motifToJson, placeMotif } from './motif'
+import { motifFrom, motifFromJson, motifToJson, placeMotif, TEMPLATE_MAX } from './motif'
 import { BUILT_IN_TEMPLATES, isCategory } from './motifs'
 import { Pattern } from './pattern'
 import {
@@ -219,4 +219,13 @@ test('the built-in templates are all valid', () => {
     assert.ok(motif.stitches.size > 10, t.id)
     assert.ok(isCategory(t.category), t.id)
   }
+})
+
+test('templates can be taller than designs', () => {
+  const tall = { width: 200, height: 400, stitches: { [RED]: ['h:0,0', 'v:200,399'] as Key[] } }
+  // Too tall for a pattern in the designer, fine as a template
+  assert.equal(motifFromJson(tall), null)
+  assert.ok(motifFromJson(tall, TEMPLATE_MAX))
+  assert.equal(motifFromJson({ ...tall, height: 401 }, TEMPLATE_MAX), null)
+  assert.equal(motifFromJson({ ...tall, width: 201 }, TEMPLATE_MAX), null)
 })

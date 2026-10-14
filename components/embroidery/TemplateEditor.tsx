@@ -2,7 +2,7 @@
 
 import { useActionState, useEffect, useRef } from 'react'
 import { deleteTemplate, saveTemplate, type TemplateFields, type TemplateSaveState } from '@/app/admin/templates/actions'
-import { motifFrom, motifFromJson, motifToJson, type MotifJson } from '@/lib/embroidery/motif'
+import { motifFrom, motifFromJson, motifToJson, TEMPLATE_MAX, type MotifJson } from '@/lib/embroidery/motif'
 import { CATEGORIES } from '@/lib/embroidery/motifs'
 import { Pattern } from '@/lib/embroidery/pattern'
 import { translate } from '@/lib/embroidery/regions'
@@ -14,17 +14,20 @@ type Props = { id: number | null; initial: TemplateFields; motif: MotifJson | nu
 const MARGIN = 2
 
 function patternFor(json: MotifJson | null) {
-  const motif = json && motifFromJson(json)
+  const motif = json && motifFromJson(json, TEMPLATE_MAX)
   if (!motif) return new Pattern(24, 24)
-  const pattern = new Pattern(motif.width + 2 * MARGIN, motif.height + 2 * MARGIN)
-  pattern.stitches = translate(motif.stitches, MARGIN, MARGIN)
+  // No margin when the motif already fills the largest grid
+  const mx = motif.width + 2 * MARGIN <= TEMPLATE_MAX.width ? MARGIN : 0
+  const my = motif.height + 2 * MARGIN <= TEMPLATE_MAX.height ? MARGIN : 0
+  const pattern = new Pattern(motif.width + 2 * mx, motif.height + 2 * my)
+  pattern.stitches = translate(motif.stitches, mx, my)
   return pattern
 }
 
 // The admin's template editor: the designer's drawing tools, and the template's details.
 // What's drawn on the grid is the template, trimmed to its stitches when saved.
 export function TemplateEditor({ id, initial, motif, t }: Props) {
-  const { hostRef, editor, state } = useEditor(() => patternFor(motif), () => {})
+  const { hostRef, editor, state } = useEditor(() => patternFor(motif), () => {}, TEMPLATE_MAX)
   const [saveState, action, pending] = useActionState(saveTemplate, {} as TemplateSaveState)
   const values = saveState.values ?? initial
   const errors = saveState.errors ?? {}
@@ -61,7 +64,15 @@ export function TemplateEditor({ id, initial, motif, t }: Props) {
             </p>
           </Section>
           <Section title={t.grid.title}>
-            <GridSize key={`${state.width}x${state.height}`} t={t} width={state.width} height={state.height} onApply={(w, h) => editor?.resize(w, h)} />
+            <GridSize
+              key={`${state.width}x${state.height}`}
+              t={t}
+              width={state.width}
+              height={state.height}
+              max={TEMPLATE_MAX}
+              hint={`4 to ${TEMPLATE_MAX.width} cells wide and 4 to ${TEMPLATE_MAX.height} high. Stitches outside a smaller grid are removed, and undo starts over.`}
+              onApply={(w, h) => editor?.resize(w, h)}
+            />
           </Section>
         </div>
       </div>

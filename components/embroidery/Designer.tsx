@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { ThemeToggle } from '@/components/ThemeToggle'
-import { isOneColour, motifFromJson, motifToJson, type Motif } from '@/lib/embroidery/motif'
+import { isOneColour, motifFromJson, motifToJson, TEMPLATE_MAX, type Motif } from '@/lib/embroidery/motif'
 import { CATEGORIES, type TemplateJson } from '@/lib/embroidery/motifs'
 import { Pattern } from '@/lib/embroidery/pattern'
 import { designerUrl, otherLang, type Lang, type Strings } from '@/lib/i18n'
@@ -35,7 +35,7 @@ export function Designer({ lang, t, theme, switchLabel, templates }: Props) {
   const { hostRef, editor, state } = useEditor(loadPattern, () => setToast({ message: t.toast.copied }))
   const library = useMemo(
     () => templates.flatMap((tpl) => {
-      const motif = motifFromJson(tpl.motif)
+      const motif = motifFromJson(tpl.motif, TEMPLATE_MAX)
       return motif ? [{ ...tpl, motif }] : []
     }),
     [templates],
@@ -157,9 +157,9 @@ export function Designer({ lang, t, theme, switchLabel, templates }: Props) {
               width={state.width}
               height={state.height}
               onApply={(w, h) => {
-                editor?.resize(w, h)
-                const s = editor?.getState()
-                if (s) setToast({ message: fill(t.toast.resized, { w: s.width, h: s.height }) })
+                const size = editor?.resize(w, h)
+                if (size) setToast({ message: fill(t.toast.resized, { w: size.width, h: size.height }) })
+                return size
               }}
             />
           </Section>

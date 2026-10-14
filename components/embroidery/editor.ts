@@ -2,7 +2,7 @@
 // into edits. The grid scrolls inside `host` with real scrollbars; the canvas covers only
 // the visible part and draws only what's in view, so big grids stay fast.
 // The page around it (Designer.tsx) reads its state through subscribe()/getState().
-import { isOneColour, placeMotif, type Motif } from '@/lib/embroidery/motif'
+import { DESIGN_MAX, isOneColour, placeMotif, type Motif, type Size } from '@/lib/embroidery/motif'
 import type { Pattern } from '@/lib/embroidery/pattern'
 import {
   clearRegion, extract, inRegion, mirrorHorizontal, mirrorVertical, recolourRegion, regionBetween, rework, rotateClockwise,
@@ -82,6 +82,8 @@ export class Editor {
     colour: string,
     // Short messages for the page to show, e.g. after copying with Ctrl+C
     private notify: (message: 'copied') => void = () => {},
+    // The largest grid size allowed
+    private maxSize: Size = DESIGN_MAX,
   ) {
     this.colour = colour
     this.scroller = document.createElement('div')
@@ -190,10 +192,11 @@ export class Editor {
   }
 
   resize(width: number, height: number) {
-    const fit = (n: number) => Math.max(4, Math.min(200, Math.round(n) || 4))
+    const fit = (n: number, max: number) => Math.max(4, Math.min(max, Math.round(n) || 4))
     this.selection = null
-    this.pattern.resize(fit(width), fit(height))
+    this.pattern.resize(fit(width, this.maxSize.width), fit(height, this.maxSize.height))
     this.layout()
+    return { width: this.pattern.width, height: this.pattern.height }
   }
 
   selectAll() {
