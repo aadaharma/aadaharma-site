@@ -1,5 +1,5 @@
 import { AppFrame, StitchDivider } from '@/components/decorations'
-import { getStrings, pageUrl, type Lang } from '@/lib/i18n'
+import { getStrings, pageUrl, yokeUrl, type Lang } from '@/lib/i18n'
 import { knitMockup } from '@/lib/knit-art'
 import { pageMetadata } from '@/lib/metadata'
 
@@ -20,6 +20,9 @@ export default async function KnittingPage({ params }: PageProps<'/[lang]/knitti
           <p className="eyebrow" />
           <h1>{t.title}</h1>
           <p className="lead">{t.lead}</p>
+          <a className="button" href={yokeUrl(lang)}>
+            {t.yokeCta} →
+          </a>
         </div>
         <AppFrame url="aadaharma.com/knitting" svg={knitMockup(strings.home.knittingCard.mockupAlt)} />
       </section>

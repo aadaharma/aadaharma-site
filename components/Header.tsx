@@ -1,16 +1,18 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { otherLang, pageUrl, PAGES, type Lang, type Page, type Strings } from '@/lib/i18n'
+import { otherLang, pageUrl, PAGES, yokeUrl, type Lang, type Page, type Strings } from '@/lib/i18n'
 import { Star } from './decorations'
 import { ThemeToggle } from './ThemeToggle'
 
 // Which page the address belongs to: /fi/patterns/selbu/ -> pattern, /knitting/ -> knitting
-function currentPage(pathname: string): Page | 'pattern' | null {
+function currentPage(pathname: string): Page | 'pattern' | 'yoke' | null {
   const parts = pathname.split('/').filter(Boolean)
-  if (parts[0] === 'fi') parts.shift()
+  // English pages are at /en/... inside the app (proxy.ts maps them there), Finnish at /fi/...
+  if (parts[0] === 'fi' || parts[0] === 'en') parts.shift()
   if (parts.length === 0) return 'home'
   if (parts[0] === 'patterns' && parts[1]) return 'pattern'
+  if (parts[0] === 'knitting' && parts[1] === 'round-yoke') return 'yoke'
   return (PAGES as readonly string[]).includes(parts[0]) && parts.length === 1 ? (parts[0] as Page) : null
 }
 
@@ -27,8 +29,10 @@ export function Header({ lang, t }: Props) {
   const switchUrl =
     page === 'pattern'
       ? pageUrl(otherLang(lang), 'patterns')
-      : pageUrl(otherLang(lang), page ?? 'home')
-  const current = (...pages: (Page | 'pattern')[]) =>
+      : page === 'yoke'
+        ? yokeUrl(otherLang(lang))
+        : pageUrl(otherLang(lang), page ?? 'home')
+  const current = (...pages: (Page | 'pattern' | 'yoke')[]) =>
     page && pages.includes(page) ? ({ 'aria-current': 'page' } as const) : {}
 
   return (
@@ -50,7 +54,7 @@ export function Header({ lang, t }: Props) {
                 </a>
               </li>
               <li>
-                <a href={urls.knitting} {...current('knitting')}>
+                <a href={urls.knitting} {...current('knitting', 'yoke')}>
                   {t.nav.knitting}
                 </a>
               </li>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { designerUrl, getStrings, LANGS, pageUrl, SITE_URL, type Lang, type Page } from './i18n'
+import { designerUrl, getStrings, LANGS, pageUrl, SITE_URL, yokeUrl, type Lang, type Page } from './i18n'
 
 const OG_IMAGE = '/img/bookmark.webp'
 
@@ -47,6 +47,16 @@ export function designerMetadata(lang: Lang): Metadata {
     description: t.description,
     path: designerUrl(lang),
     alternates: Object.fromEntries(LANGS.map((l) => [l, designerUrl(l)])),
+  })
+}
+
+export function yokeMetadata(lang: Lang): Metadata {
+  const t = getStrings(lang).yoke
+  return build({
+    title: t.metaTitle,
+    description: t.description,
+    path: yokeUrl(lang),
+    alternates: Object.fromEntries(LANGS.map((l) => [l, yokeUrl(l)])),
   })
 }
 
