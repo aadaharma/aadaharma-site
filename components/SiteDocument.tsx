@@ -10,7 +10,8 @@ import { themeScript } from './ThemeToggle'
 export function Document({ lang, children }: { lang: Lang; children: ReactNode }) {
   return (
     // The theme script adds a class and data-theme to <html> before React hydrates
-    <html lang={lang} suppressHydrationWarning>
+    // data-scroll-behavior: the CSS scrolls smoothly, which Next.js turns off while changing pages
+    <html lang={lang} suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link rel="icon" href="/favicon.ico" />

@@ -58,7 +58,13 @@ The designer is at `/karelianembroiderymaker/` (and `/fi/karelianembroiderymaker
   shapes, selections, undo/redo and templates. `npm test` runs its tests.
 - `components/embroidery/editor.ts` is the canvas: drawing, dragging, zooming and
   scrolling. `Designer.tsx` is the page around it, and `src/styles/designer.css` its look.
-- The templates are in `lib/embroidery/motifs.ts` for now.
+- Templates are in the `templates` table and are drawn in the admin at
+  [/admin/templates/](https://aadaharma.com/admin/templates/), with the same tools as the
+  designer. Published ones appear in the designer's library; saving one refreshes the
+  designer. A template in one colour is stitched in the user's colour; with more colours,
+  it keeps its own. The categories are fixed, in `lib/embroidery/motifs.ts`.
+- `lib/embroidery/motifs.ts` also has the first ten templates. They were copied into the
+  database with `npm run seed:templates`, and are used as they are without a database.
 - The drawing is kept in the browser (localStorage), so reloading doesn't lose it.
 
 It replaces the old designer, which was its own repo (aadaharma/karelianembroiderymaker)
@@ -78,6 +84,7 @@ numbered chart.
 
 ### The admin page
 
+The admin also has the embroidery designer's templates (see above).
 Patterns are added and edited at [aadaharma.com/admin/](https://aadaharma.com/admin/):
 fill in the form, upload a cover photo and PDF, and tick "Published" when it's ready.
 Saving updates the site straight away; drafts can be checked with "Preview" first.

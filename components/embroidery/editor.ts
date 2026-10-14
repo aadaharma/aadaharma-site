@@ -2,7 +2,7 @@
 // into edits. The grid scrolls inside `host` with real scrollbars; the canvas covers only
 // the visible part and draws only what's in view, so big grids stay fast.
 // The page around it (Designer.tsx) reads its state through subscribe()/getState().
-import { placeMotif, type Motif } from '@/lib/embroidery/motif'
+import { isOneColour, placeMotif, type Motif } from '@/lib/embroidery/motif'
 import type { Pattern } from '@/lib/embroidery/pattern'
 import {
   clearRegion, extract, inRegion, mirrorHorizontal, mirrorVertical, recolourRegion, regionBetween, rework, rotateClockwise,
@@ -255,14 +255,14 @@ export class Editor {
   }
 
 
-  // Templates are in one colour and are stitched in the current colour; pasted pieces
-  // keep their own colours
+  // One-colour templates are stitched in the current colour; pasted pieces and
+  // multicoloured templates keep their own colours
   startPlacing(motif: Motif, name: string, kind: 'template' | 'paste' = 'template') {
     const centre = this.toGrid(this.view.width / 2, this.view.height / 2)
     const at = { x: Math.round(centre.x - motif.width / 2), y: Math.round(centre.y - motif.height / 2) }
     this.selection = null
     this.tool = 'place'
-    this.placing = { motif, kind, name, recolour: kind === 'template', at }
+    this.placing = { motif, kind, name, recolour: kind === 'template' && isOneColour(motif), at }
     this.scroller.style.cursor = CURSORS.place
     this.changed()
   }

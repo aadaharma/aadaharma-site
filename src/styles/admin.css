@@ -64,7 +64,8 @@ button:disabled {
 }
 
 .admin-list img,
-.admin-list__blank {
+.admin-list__blank,
+.template-thumb {
   flex: none;
   width: 4rem;
   height: 4rem;
@@ -86,6 +87,21 @@ button:disabled {
 
 .admin-list__meta .tag {
   margin: 0 0.5rem 0 0;
+}
+
+.admin-templates {
+  margin-top: 2rem;
+}
+
+.admin-templates h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.admin-templates h2 small {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 /* Forms */

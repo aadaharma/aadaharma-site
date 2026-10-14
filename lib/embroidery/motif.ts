@@ -49,3 +49,6 @@ export function placeMotif(pattern: Pattern, motif: Motif, x: number, y: number,
     for (const [k, c] of translate(motif.stitches, x, y)) pattern.set(k, colour ?? c)
   })
 }
+
+// One-colour motifs are stitched in the user's colour; others keep their own colours
+export const isOneColour = (motif: Motif) => new Set(motif.stitches.values()).size <= 1

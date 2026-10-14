@@ -94,7 +94,8 @@ export function drawFabric(
 }
 
 // A template's small picture: the motif centred on a bit of linen, in the given colour
-export function drawPreview(canvas: HTMLCanvasElement, motif: Motif, colour: string) {
+// or, without one, in its own colours
+export function drawPreview(canvas: HTMLCanvasElement, motif: Motif, colour?: string) {
   const dpr = window.devicePixelRatio || 1
   const w = canvas.clientWidth || canvas.width
   const h = canvas.clientHeight || canvas.height
@@ -108,7 +109,7 @@ export function drawPreview(canvas: HTMLCanvasElement, motif: Motif, colour: str
   const size = Math.min((w - 2 * pad) / motif.width, (h - 2 * pad) / motif.height)
   const ox = (w - motif.width * size) / 2
   const oy = (h - motif.height * size) / 2
-  drawStitches(ctx, [...motif.stitches.keys()].map((k) => [k, colour] as const), size, ox, oy)
+  drawStitches(ctx, colour ? [...motif.stitches.keys()].map((k) => [k, colour] as const) : motif.stitches, size, ox, oy)
 }
 
 // The whole pattern as a PNG, with a one-cell margin of linen around it
