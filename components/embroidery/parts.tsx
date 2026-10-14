@@ -3,6 +3,7 @@
 // Pieces of the embroidery workbench shared by the designer (Designer.tsx) and the
 // admin's template editor (app/admin/templates)
 import { useEffect, useRef, useState, useSyncExternalStore, type CSSProperties, type ReactNode } from 'react'
+import { DESIGN_MAX, type Size } from '@/lib/embroidery/motif'
 import { DEFAULT_COLOUR } from '@/lib/embroidery/motifs'
 import type { Pattern } from '@/lib/embroidery/pattern'
 import { SHAPES, type Shape } from '@/lib/embroidery/shapes'
@@ -32,7 +33,7 @@ const noSubscribe = () => () => {}
 
 // Puts an editor (the canvas) into the element hostRef points to, with the pattern
 // makePattern() returns, and keeps `state` up to date
-export function useEditor(makePattern: () => Pattern, onCopied: () => void) {
+export function useEditor(makePattern: () => Pattern, onCopied: () => void, maxSize: Size = DESIGN_MAX) {
   const hostRef = useRef<HTMLDivElement>(null)
   const [editor, setEditor] = useState<Editor | null>(null)
   const state = useSyncExternalStore(editor?.subscribe ?? noSubscribe, editor?.getState ?? (() => INITIAL), () => INITIAL)
@@ -40,7 +41,7 @@ export function useEditor(makePattern: () => Pattern, onCopied: () => void) {
   const copied = useRef(onCopied)
   copied.current = onCopied
   useEffect(() => {
-    const ed = new Editor(hostRef.current!, make.current(), DEFAULT_COLOUR, () => copied.current())
+    const ed = new Editor(hostRef.current!, make.current(), DEFAULT_COLOUR, () => copied.current(), maxSize)
     setEditor(ed)
     return () => ed.destroy()
   }, [])
@@ -210,30 +211,38 @@ export function Colours({ colour, t, onChange }: { colour: string; t: T; onChang
   )
 }
 
-export function GridSize({ t, width, height, onApply }: { t: T; width: number; height: number; onApply: (w: number, h: number) => void }) {
+export function GridSize({
+  t, width, height, onApply, max = DESIGN_MAX, hint = t.grid.hint,
+}: { t: T; width: number; height: number; onApply: (w: number, h: number) => Size | undefined; max?: Size; hint?: string }) {
   return (
     <>
       <form
         className="designer-grid-size"
         onSubmit={(e) => {
           e.preventDefault()
-          const form = new FormData(e.currentTarget)
-          onApply(Number(form.get('width')), Number(form.get('height')))
+          const form = e.currentTarget
+          const data = new FormData(form)
+          const size = onApply(Number(data.get('width')), Number(data.get('height')))
+          // Show the size the grid really is, e.g. 200 after asking for 250
+          if (size) {
+            ;(form.elements.namedItem('width') as HTMLInputElement).value = String(size.width)
+            ;(form.elements.namedItem('height') as HTMLInputElement).value = String(size.height)
+          }
         }}
       >
         <label>
           {t.grid.width}
-          <input name="width" type="number" min={4} max={200} defaultValue={width} inputMode="numeric" />
+          <input name="width" type="number" min={4} max={max.width} defaultValue={width} inputMode="numeric" />
         </label>
         <label>
           {t.grid.height}
-          <input name="height" type="number" min={4} max={200} defaultValue={height} inputMode="numeric" />
+          <input name="height" type="number" min={4} max={max.height} defaultValue={height} inputMode="numeric" />
         </label>
         <button type="submit" className="action-button">
           {t.grid.apply}
         </button>
       </form>
-      <p className="designer-hint">{t.grid.hint}</p>
+      <p className="designer-hint">{hint}</p>
     </>
   )
 }

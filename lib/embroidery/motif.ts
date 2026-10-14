@@ -9,6 +9,12 @@ export type Motif = { width: number; height: number; stitches: Stitches }
 // As stored: stitch keys grouped by colour, e.g. { "#bd0603": ["h:0,0", "d:1,0"] }
 export type MotifJson = { width: number; height: number; stitches: Record<string, Key[]> }
 
+// The largest grids: a pattern in the designer, and a template drawn in the admin
+// (tall enough for a drawing that runs down a whole page)
+export type Size = { width: number; height: number }
+export const DESIGN_MAX: Size = { width: 200, height: 200 }
+export const TEMPLATE_MAX: Size = { width: 200, height: 400 }
+
 const KEY = /^[hvda]:\d+,\d+$/
 const COLOUR = /^#[0-9a-f]{6}$/i
 
@@ -19,11 +25,11 @@ export function motifToJson({ width, height, stitches }: Motif): MotifJson {
 }
 
 // Reads a motif from JSON (e.g. from the admin's request), or null if it isn't valid
-export function motifFromJson(json: unknown): Motif | null {
+export function motifFromJson(json: unknown, max: Size = DESIGN_MAX): Motif | null {
   if (!json || typeof json !== 'object') return null
   const { width, height, stitches } = json as Partial<MotifJson>
   if (!Number.isInteger(width) || !Number.isInteger(height) || width! < 1 || height! < 1) return null
-  if (width! > 200 || height! > 200 || !stitches || typeof stitches !== 'object') return null
+  if (width! > max.width || height! > max.height || !stitches || typeof stitches !== 'object') return null
   const out: Stitches = new Map()
   for (const [colour, keys] of Object.entries(stitches)) {
     if (!COLOUR.test(colour) || !Array.isArray(keys)) return null
