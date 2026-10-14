@@ -1,6 +1,7 @@
-// The designer's first templates, until templates are kept in the database and drawn
-// in the admin. Each is in one colour and is stitched in the colour the user has chosen.
-import { motifFromJson, type Motif } from './motif'
+// Template categories, and the designer's first ten templates. Templates are kept in the
+// database and drawn in the admin (/admin/templates/); these were copied there with
+// `npm run seed:templates`, and are used as they are when there's no database.
+import type { MotifJson } from './motif'
 import type { Key } from './stitches'
 
 export const DEFAULT_COLOUR = '#bd0603'
@@ -14,16 +15,19 @@ export const CATEGORIES = [
 ] as const
 
 export type Category = (typeof CATEGORIES)[number]['id']
-export type Template = { id: string; name: { en: string; fi: string }; category: Category; motif: Motif }
+export const isCategory = (value: string): value is Category => CATEGORIES.some((c) => c.id === value)
 
-const template = (id: string, en: string, fi: string, category: Category, width: number, height: number, keys: string) => ({
+// A template as the designer gets it (from the database or from here)
+export type TemplateJson = { id: string; name: { en: string; fi: string }; category: Category; motif: MotifJson }
+
+const template = (id: string, en: string, fi: string, category: Category, width: number, height: number, keys: string): TemplateJson => ({
   id,
   name: { en, fi },
   category,
-  motif: motifFromJson({ width, height, stitches: { [DEFAULT_COLOUR]: keys.split(' ') as Key[] } })!,
+  motif: { width, height, stitches: { [DEFAULT_COLOUR]: keys.split(' ') as Key[] } },
 })
 
-export const TEMPLATES: Template[] = [
+export const BUILT_IN_TEMPLATES: TemplateJson[] = [
   template('star8', 'Eight-pointed star', 'Kahdeksankanta', 'stars', 12, 12,
     'a:0,5 a:1,4 a:10,7 a:11,6 a:2,3 a:3,2 a:4,1 a:4,5 a:4,7 a:5,0 a:5,4 a:5,6 a:6,11 a:6,5 a:6,7 ' +
     'a:7,10 a:7,4 a:7,6 a:8,9 a:9,8 d:0,6 d:1,7 d:10,4 d:11,5 d:2,8 d:3,9 d:4,10 d:4,4 d:4,6 ' +

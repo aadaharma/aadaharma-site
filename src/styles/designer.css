@@ -1,7 +1,8 @@
 /* The Karelian Embroidery Designer (app/[lang]/karelianembroiderymaker): a full-screen
    workbench with tools on the left, the linen in the middle and a sidebar on the right.
    On narrow screens the tools move to the bottom and the sidebar slides in. */
-.designer {
+.designer,
+.template-editor {
   --line-strong: #c9ad8f;
   --hover: rgb(163 64 28 / 0.08);
   /* The canvas reads these (components/embroidery/editor.ts) */
@@ -9,7 +10,9 @@
   --ke-fabric: #fcf9f2;
   --ke-accent: #a3401c;
   --ke-shadow: rgb(80 40 10 / 0.22);
+}
 
+.designer {
   position: fixed;
   inset: 0;
   display: grid;
@@ -20,7 +23,8 @@
 }
 
 @media (prefers-color-scheme: dark) {
-  :root:not([data-theme='light']) .designer {
+  :root:not([data-theme='light']) .designer,
+  :root:not([data-theme='light']) .template-editor {
     --line-strong: #6b5242;
     --hover: rgb(240 149 107 / 0.12);
     --ke-surround: #15100c;
@@ -30,7 +34,8 @@
   }
 }
 
-:root[data-theme='dark'] .designer {
+:root[data-theme='dark'] .designer,
+:root[data-theme='dark'] .template-editor {
   --line-strong: #6b5242;
   --hover: rgb(240 149 107 / 0.12);
   --ke-surround: #15100c;
@@ -444,6 +449,35 @@
   cursor: pointer;
 }
 
+/* The admin's template editor (components/embroidery/TemplateEditor.tsx): the same tools
+   in a box inside the admin page, with the template's details below */
+.template-editor {
+  display: grid;
+  gap: 1.5rem;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.template-editor__bench {
+  display: grid;
+  grid-template-columns: 60px minmax(0, 1fr) 280px;
+  height: min(72vh, 680px);
+  overflow: hidden;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.template-editor__side {
+  min-width: 0;
+  overflow-y: auto;
+  border-left: 1px solid var(--line);
+}
+
+.template-editor__form {
+  max-width: none;
+}
+
 /* Only on narrow screens */
 .panel-toggle,
 .designer-side__close,
@@ -552,6 +586,26 @@
     inset: 0;
     z-index: 39;
     background: rgb(28 20 16 / 0.4);
+  }
+}
+
+@media (max-width: 820px) {
+  /* The tool rail goes along the bottom (see .designer-rail above) */
+  .template-editor__bench {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr) auto auto;
+    height: auto;
+  }
+
+  .template-editor__bench .designer-stage {
+    height: 60vh;
+  }
+
+  .template-editor__side {
+    grid-row: 2;
+    max-height: 40vh;
+    border-top: 1px solid var(--line);
+    border-left: 0;
   }
 }
 

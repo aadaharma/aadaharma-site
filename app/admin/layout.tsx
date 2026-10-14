@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default async function AdminLayout({ children }: { children: ReactNode }) {
   const loggedIn = await isAdmin()
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link rel="icon" href="/favicon.ico" />
@@ -33,6 +33,16 @@ export default async function AdminLayout({ children }: { children: ReactNode })
             </a>
             <nav className="site-nav" aria-label="Admin">
               <ul>
+                {loggedIn && (
+                  <>
+                    <li>
+                      <a href="/admin/">Patterns</a>
+                    </li>
+                    <li>
+                      <a href="/admin/templates/">Templates</a>
+                    </li>
+                  </>
+                )}
                 <li>
                   <a href="/">View site</a>
                 </li>

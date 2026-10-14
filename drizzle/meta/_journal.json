@@ -8,6 +8,13 @@
       "when": 1791896481027,
       "tag": "0000_create_patterns",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791970434767,
+      "tag": "0001_create_templates",
+      "breakpoints": true
     }
   ]
 }

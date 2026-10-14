@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { motifFrom, motifFromJson, motifToJson, placeMotif } from './motif'
-import { CATEGORIES, TEMPLATES } from './motifs'
+import { BUILT_IN_TEMPLATES, isCategory } from './motifs'
 import { Pattern } from './pattern'
 import {
   bounds, clearRegion, extract, mirrorHorizontal, mirrorVertical, recolourRegion, regionBetween, rework, rotateClockwise, translate,
@@ -212,10 +212,11 @@ test('listeners hear about changes', () => {
 })
 
 test('the built-in templates are all valid', () => {
-  assert.equal(TEMPLATES.length, 10)
-  for (const t of TEMPLATES) {
-    assert.ok(t.motif, t.id)
-    assert.ok(t.motif.stitches.size > 10, t.id)
-    assert.ok(CATEGORIES.some((c) => c.id === t.category), t.id)
+  assert.equal(BUILT_IN_TEMPLATES.length, 10)
+  for (const t of BUILT_IN_TEMPLATES) {
+    const motif = motifFromJson(t.motif)
+    assert.ok(motif, t.id)
+    assert.ok(motif.stitches.size > 10, t.id)
+    assert.ok(isCategory(t.category), t.id)
   }
 })

@@ -14,7 +14,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "import:patterns": "tsx scripts/import-markdown.ts",
-    "test": "node --import tsx --test 'lib/**/*.test.ts'"
+    "test": "node --import tsx --test 'lib/**/*.test.ts'",
+    "seed:templates": "tsx scripts/seed-templates.ts"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
