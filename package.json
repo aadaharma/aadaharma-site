@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
-    "import:patterns": "tsx scripts/import-markdown.ts"
+    "import:patterns": "tsx scripts/import-markdown.ts",
+    "test": "node --import tsx --test 'lib/**/*.test.ts'"
   },
   "dependencies": {
     "@neondatabase/serverless": "^1.2.0",
