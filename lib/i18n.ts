@@ -25,3 +25,6 @@ export const patternUrl = (lang: Lang, slug: string) => `${pageUrl(lang, 'patter
 
 // The embroidery designer, which has its own layout (app/[lang]/karelianembroiderymaker)
 export const designerUrl = (lang: Lang) => (lang === 'en' ? '' : `/${lang}`) + '/karelianembroiderymaker/'
+
+// The round yoke sweater calculator, under the Knitting page
+export const yokeUrl = (lang: Lang) => `${pageUrl(lang, 'knitting')}round-yoke/`

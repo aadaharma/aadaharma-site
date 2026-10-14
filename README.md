@@ -70,6 +70,13 @@ The designer is at `/karelianembroiderymaker/` (and `/fi/karelianembroiderymaker
 It replaces the old designer, which was its own repo (aadaharma/karelianembroiderymaker)
 and Vercel project.
 
+## Knitting calculators
+
+The round yoke sweater calculator is at `/knitting/round-yoke/` (and in Finnish under
+`/fi/`). The maths is in `lib/knitting/yoke.ts`, with tests (`npm test`), and the page in
+`components/knitting/YokeCalculator.tsx`. It calculates in the browser as you type and
+remembers what was entered (localStorage); nothing is sent anywhere.
+
 ## Knitting patterns
 
 Patterns live in the `patterns` table (`lib/db/schema.ts`). Each one has an address

@@ -1,0 +1,221 @@
+/* Knitting calculators (app/[lang]/(site)/knitting/round-yoke): the form on the left,
+   the numbers on the right; on narrow screens the numbers come after the form */
+.calc-page {
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+}
+
+.calc {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: 2rem;
+}
+
+.calc-form {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.calc-form .note {
+  margin: 0;
+}
+
+.calc-form fieldset {
+  display: grid;
+  gap: 0.75rem;
+  margin: 0;
+  padding: 1.1rem 1.25rem 1.25rem;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.calc-form legend {
+  padding-inline: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--rust);
+}
+
+.calc-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 0.9rem 1rem;
+}
+
+.calc-field {
+  display: grid;
+  gap: 0.25rem;
+  align-content: start;
+  min-width: 0;
+}
+
+.calc-field label {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.calc-input {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.calc-input span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.calc-input input {
+  width: 100%;
+  min-width: 0;
+  height: 2.6rem;
+  padding: 0 0.7rem;
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--linen);
+  color: var(--ink);
+  font: inherit;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-input input:focus-visible {
+  outline: 2px dashed var(--rust);
+  outline-offset: 2px;
+}
+
+.calc-input input[aria-invalid='true'] {
+  border-color: var(--rust);
+}
+
+.calc-hint,
+.calc-error {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.calc-error {
+  color: var(--rust);
+  font-weight: 600;
+}
+
+.calc-check {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 600;
+}
+
+.calc-check input {
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--rust);
+}
+
+/* Results */
+.calc-results {
+  position: sticky;
+  top: 1rem;
+  display: grid;
+  /* The table scrolls inside its own box rather than widening the panel */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem 1.5rem;
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.calc-results h2 {
+  margin: 0;
+  font-size: 1.6rem;
+}
+
+.calc-group h3 {
+  margin: 0 0 0.4rem;
+  font-size: 1.15rem;
+}
+
+.calc-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.calc-list {
+  display: grid;
+  margin: 0;
+}
+
+.calc-list > div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  padding: 0.35rem 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.calc-list dt {
+  color: var(--muted);
+}
+
+.calc-list dd {
+  margin: 0;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-list .is-strong dd {
+  color: var(--rust);
+  font-size: 1.15rem;
+}
+
+.calc-warning {
+  margin: 0;
+  padding: 0.75rem 1rem;
+  border: 1.5px dashed var(--rust);
+  border-radius: var(--radius);
+  background: var(--linen);
+}
+
+.calc-table-wrap {
+  max-height: 22rem;
+  overflow: auto;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.calc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.calc-table th,
+.calc-table td {
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.calc-table th {
+  position: sticky;
+  top: 0;
+  background: var(--chrome);
+  font-weight: 600;
+}
+
+@media (max-width: 860px) {
+  .calc {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .calc-results {
+    position: static;
+  }
+}
