@@ -283,7 +283,7 @@
       "neckRaise": "Korota niskaa lyhennetyillä kerroksilla",
       "neckRaiseHeight": "Korotuksen korkeus",
       "cm": "cm",
-      "invalid": "Kirjoita luku."
+      "invalid": "Kirjoita luku väliltä {min}–{max}."
     },
     "results": {
       "title": "Sinun lukusi",
@@ -330,7 +330,8 @@
         "neckTooBig": "Pääntie on yhtä leveä kuin kaarrokkeen alareuna, joten lisättävää ei ole. Tarkista pääntien, rinnan ja olkavarren mitat.",
         "tooFewIncreases": "{n} lisäystä kerroksella ei mahdu kaarrokkeeseen. Käytä vähintään {minimum} tai pidempää kaarroketta.",
         "increasesEveryRound": "Tämä vaatii lisäyksiä peräkkäisillä kerroksilla. Useampi lisäys kerroksella harventaa niitä.",
-        "shortRowsDontFit": "Niskan korotus on liian korkea tälle pääntielle. Kokeile matalampaa."
+        "shortRowsDontFit": "Niskan korotus on liian korkea tälle pääntielle. Kokeile matalampaa.",
+        "moreIncreasesThanStitches": "Lisäyksiä on kerroksella enemmän kuin pääntiellä on silmukoita. Käytä vähemmän lisäyksiä kerroksella."
       }
     }
   }

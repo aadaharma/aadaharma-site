@@ -285,7 +285,7 @@
       "neckRaise": "Raise the back of the neck with short rows",
       "neckRaiseHeight": "Height of the raise",
       "cm": "cm",
-      "invalid": "Enter a number."
+      "invalid": "Enter a number from {min} to {max}."
     },
     "results": {
       "title": "Your numbers",
@@ -332,7 +332,8 @@
         "neckTooBig": "The neckline is as wide as the bottom of the yoke, so there's nothing to increase. Check the neckline, bust and upper arm measurements.",
         "tooFewIncreases": "{n} increases per round won't fit into the yoke. Use at least {minimum}, or a longer yoke.",
         "increasesEveryRound": "This needs increases on consecutive rounds. More increases per round spread them out.",
-        "shortRowsDontFit": "The back neck raise is too tall for this neckline. Try a lower one."
+        "shortRowsDontFit": "The back neck raise is too tall for this neckline. Try a lower one.",
+        "moreIncreasesThanStitches": "There are more increases per round than stitches at the neck. Use fewer increases per round."
       }
     }
   }

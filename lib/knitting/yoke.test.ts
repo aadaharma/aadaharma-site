@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { calculateYoke, intervals, invalidFields, spacing, type YokeInput } from './yoke'
+import { calculateYoke, intervals, invalidFields, LIMITS, spacing, type YokeInput } from './yoke'
 
 const sweater: YokeInput = {
   stitchGauge: 22, roundGauge: 30, neck: 50, bust: 90, bodyEase: 5, upperArm: 28, sleeveEase: 3,
@@ -96,4 +96,28 @@ test('unusable input is pointed out', () => {
   assert.deepEqual(invalidFields(sweater), [])
   assert.deepEqual(invalidFields({ ...sweater, stitchGauge: 0, increasesPerRound: 2.5, bodyEase: -100 }).sort(), ['bodyEase', 'increasesPerRound', 'stitchGauge'])
   assert.deepEqual(invalidFields({ ...sweater, neckRaise: Number.NaN }), ['neckRaise'])
+})
+
+test('every field has a maximum, and the limits themselves are accepted', () => {
+  for (const [field, { min, max }] of Object.entries(LIMITS) as [keyof YokeInput, { min: number; max: number }][]) {
+    assert.deepEqual(invalidFields({ ...sweater, [field]: max }), [], `${field} at its maximum`)
+    assert.deepEqual(invalidFields({ ...sweater, [field]: min }), [], `${field} at its minimum`)
+    assert.deepEqual(invalidFields({ ...sweater, [field]: max + 1 }), [field], `${field} over its maximum`)
+  }
+})
+
+test('the largest and smallest sweaters within the limits still add up', () => {
+  const at = (end: 'min' | 'max') =>
+    Object.fromEntries(Object.entries(LIMITS).map(([k, l]) => [k, l[end]])) as unknown as YokeInput
+  for (const input of [at('max'), at('min'), { ...at('max'), stitchGauge: 5 }, { ...at('min'), stitchGauge: 60 }]) {
+    const r = calculateYoke(input)
+    const last = r.increaseRounds.at(-1)
+    assert.equal(last ? last.after : r.castOn, Math.max(r.yokeStitches, r.castOn))
+    for (const round of r.increaseRounds) assert.ok(round.spacing.every((g) => g.knit >= 0 && g.times > 0))
+  }
+})
+
+test('more increases than stitches in a round is pointed out', () => {
+  const r = calculateYoke({ ...sweater, neck: 20, stitchGauge: 10, increasesPerRound: 150 })
+  assert.ok(r.warnings.some((w) => w.kind === 'moreIncreasesThanStitches'))
 })
