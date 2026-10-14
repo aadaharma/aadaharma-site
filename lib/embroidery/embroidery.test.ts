@@ -1,10 +1,15 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { motifFrom, motifFromJson, motifToJson, placeMotif } from './motif'
+import { CATEGORIES, TEMPLATES } from './motifs'
 import { Pattern } from './pattern'
-import { bounds, extract, mirrorHorizontal, mirrorVertical, regionBetween, rotateClockwise, translate } from './regions'
+import {
+  bounds, clearRegion, extract, mirrorHorizontal, mirrorVertical, recolourRegion, regionBetween, rework, rotateClockwise, translate,
+} from './regions'
 import { SHAPES } from './shapes'
-import { endpoints, key, pointsBetween, stitchBetween, stitchesAlong, type Key, type Stitches } from './stitches'
+import {
+  endpoints, key, penStep, pointsBetween, stitchBetween, stitchesAlong, stitchesNear, type Key, type Stitches,
+} from './stitches'
 
 const RED = '#bd0603'
 const of = (...keys: Key[]): Stitches => new Map(keys.map((k) => [k, RED]))
@@ -141,4 +146,76 @@ test('placing a motif is one undo step and can recolour it', () => {
   assert.equal(p.stitches.get(key('d', 3, 4)), '#000000')
   p.undo()
   assert.equal(p.stitches.size, 0)
+})
+
+test('the stitch nearest the pointer is found', () => {
+  // Just below the middle of the cell's top edge
+  assert.equal(stitchesNear(2.5, 3.1, 0.3)[0], key('h', 2, 3))
+  // In the middle of the cell both diagonals cross
+  assert.deepEqual(new Set(stitchesNear(2.5, 3.5, 0.1)), new Set([key('d', 2, 3), key('a', 2, 3)]))
+  assert.deepEqual(stitchesNear(2.5, 3.25, 0.1), [])
+})
+
+test('the pen holds still until the pointer is near the next point', () => {
+  const start = penStep(null, 2.2, 2.9, 10, 10)!
+  assert.deepEqual(start, { x: 2, y: 3 })
+  // Halfway between two points: stay
+  assert.equal(penStep(start, 2.5, 3, 10, 10), null)
+  // Close to the next point: move
+  assert.deepEqual(penStep(start, 2.9, 3, 10, 10), { x: 3, y: 3 })
+  // A jump of several points is taken at once
+  assert.deepEqual(penStep(start, 6.4, 3, 10, 10), { x: 6, y: 3 })
+  // Kept inside the grid
+  assert.deepEqual(penStep(null, -3, 12, 10, 10), { x: 0, y: 10 })
+})
+
+test('a cancelled drag leaves nothing behind', () => {
+  const p = new Pattern(10, 10)
+  p.begin()
+  p.set(key('h', 0, 0), RED)
+  p.cancel()
+  assert.equal(p.stitches.size, 0)
+  assert.equal(p.canUndo, false)
+})
+
+test('selection actions change only the selection, as one step each', () => {
+  const p = new Pattern(10, 10)
+  p.edit(() => {
+    p.set(key('d', 0, 0), RED)
+    p.set(key('h', 0, 0), RED)
+    p.set(key('h', 8, 8), RED)
+  })
+  const r = { x: 0, y: 0, width: 2, height: 2 }
+  recolourRegion(p, r, '#000000')
+  assert.equal(p.stitches.get(key('d', 0, 0)), '#000000')
+  assert.equal(p.stitches.get(key('h', 8, 8)), RED)
+  rework(p, r, (piece) => mirrorHorizontal(piece, 2), 3, 1)
+  assert.deepEqual(keys(p.stitches), [key('a', 4, 1), key('h', 4, 1), key('h', 8, 8)].sort())
+  p.undo()
+  assert.deepEqual(keys(p.stitches), [key('d', 0, 0), key('h', 0, 0), key('h', 8, 8)].sort())
+  clearRegion(p, r)
+  assert.deepEqual(keys(p.stitches), [key('h', 8, 8)])
+})
+
+test('listeners hear about changes', () => {
+  const p = new Pattern(10, 10)
+  let calls = 0
+  const stop = p.subscribe(() => calls++)
+  p.set(key('h', 0, 0), RED)
+  p.undo()
+  stop()
+  p.redo()
+  assert.ok(calls >= 2)
+  const before = calls
+  p.set(key('h', 1, 0), RED)
+  assert.equal(calls, before)
+})
+
+test('the built-in templates are all valid', () => {
+  assert.equal(TEMPLATES.length, 10)
+  for (const t of TEMPLATES) {
+    assert.ok(t.motif, t.id)
+    assert.ok(t.motif.stitches.size > 10, t.id)
+    assert.ok(CATEGORIES.some((c) => c.id === t.category), t.id)
+  }
 })

@@ -86,3 +86,38 @@ export const cellAt = (x: number, y: number): Point => ({ x: Math.floor(x), y: M
 export function inGrid(k: Key, width: number, height: number) {
   return endpoints(k).every((p) => p.x >= 0 && p.y >= 0 && p.x <= width && p.y <= height)
 }
+
+// Distance from a position to a stitch, in cells
+export function distanceTo(k: Key, x: number, y: number) {
+  const [p, q] = endpoints(k)
+  const dx = q.x - p.x
+  const dy = q.y - p.y
+  const t = Math.max(0, Math.min(1, ((x - p.x) * dx + (y - p.y) * dy) / (dx * dx + dy * dy)))
+  return Math.hypot(x - (p.x + t * dx), y - (p.y + t * dy))
+}
+
+// The stitches of the cell a position is in that are within r cells of it, nearest first
+export function stitchesNear(x: number, y: number, r: number): Key[] {
+  const { x: cx, y: cy } = cellAt(x, y)
+  const candidates = [
+    key('h', cx, cy), key('h', cx, cy + 1), key('v', cx, cy), key('v', cx + 1, cy), key('d', cx, cy), key('a', cx, cy),
+  ]
+  return candidates
+    .map((k) => [k, distanceTo(k, x, y)] as const)
+    .filter(([, d]) => d <= r)
+    .sort((a, b) => a[1] - b[1])
+    .map(([k]) => k)
+}
+
+// Where the pen moves to while dragging, or null to stay put. A neighbouring point is
+// taken only once the pointer is within `pull` cells of it, so a hand drawing along a
+// line doesn't wobble into the diagonals; bigger jumps are taken at once (and filled in
+// with stitchesAlong). Positions are kept inside a grid of width × height cells.
+export function penStep(last: Point | null, x: number, y: number, width: number, height: number, pull = 0.42): Point | null {
+  const q = { x: Math.max(0, Math.min(width, Math.round(x))), y: Math.max(0, Math.min(height, Math.round(y))) }
+  if (!last) return q
+  if (q.x === last.x && q.y === last.y) return null
+  const neighbour = Math.max(Math.abs(q.x - last.x), Math.abs(q.y - last.y)) === 1
+  if (neighbour && Math.hypot(x - q.x, y - q.y) > pull) return null
+  return q
+}
