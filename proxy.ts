@@ -19,7 +19,7 @@ export function proxy(request: NextRequest) {
 }
 
 export const config = {
-  // Skip Next.js internals, files (fonts, images, favicon) and the embroidery app,
-  // which next.config.ts serves from its own Vercel project
-  matcher: ['/((?!_next/|api/|karelianembroiderymaker(?:/|$)|.*\\.[\\w]+$).*)'],
+  // Skip Next.js internals, files (fonts, images, favicon), the admin (app/admin, its own
+  // root layout) and the embroidery app, which next.config.ts serves from its own Vercel project
+  matcher: ['/((?!_next/|api/|admin(?:/|$)|karelianembroiderymaker(?:/|$)|.*\\.[\\w]+$).*)'],
 }
