@@ -48,6 +48,8 @@ export const templates = pgTable('templates', {
   height: integer('height').notNull(),
   stitches: jsonb('stitches').$type<Record<string, Key[]>>().notNull(),
   published: boolean('published').notNull().default(false),
+  // The one template drawn down the edges of every page (see components/PageBorder.tsx)
+  pageBorder: boolean('page_border').notNull().default(false),
   createdAt: timestamp('created_at', { withTimezone: true }).notNull().defaultNow(),
   updatedAt: timestamp('updated_at', { withTimezone: true })
     .notNull()

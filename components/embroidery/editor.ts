@@ -64,7 +64,7 @@ export class Editor {
   private spacer: HTMLDivElement
   private canvas: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
-  private colours = { surround: '#ecdcc6', accent: '#a3401c', shadow: 'rgb(80 40 10 / 0.22)', fabric: LINEN }
+  private colours = { surround: '#e3e1d6', accent: '#8e4458', shadow: 'rgb(40 35 10 / 0.22)', fabric: LINEN }
   private offset = { x: 32, y: 32 } // where the grid starts inside the scrolled area
   private view = { width: 0, height: 0, dpr: 1 }
   private hover: Point | null = null // pointer position in cells

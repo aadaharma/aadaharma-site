@@ -1,4 +1,4 @@
-import { AppFrame, Star, StitchDivider } from '@/components/decorations'
+import { AppFrame, Star } from '@/components/decorations'
 import { getStrings, pageUrl, type Lang } from '@/lib/i18n'
 import { knitMockup, libraryMockup } from '@/lib/knit-art'
 import { pageMetadata } from '@/lib/metadata'
@@ -28,7 +28,6 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
         </div>
       </section>
 
-      <StitchDivider />
 
       <section className="container section" aria-labelledby="projects-title">
         <h2 id="projects-title">{t.projectsTitle}</h2>

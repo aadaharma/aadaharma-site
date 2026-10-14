@@ -3,13 +3,13 @@
    On narrow screens the tools move to the bottom and the sidebar slides in. */
 .designer,
 .template-editor {
-  --line-strong: #c9ad8f;
-  --hover: rgb(163 64 28 / 0.08);
+  --line-strong: #c3bca4;
+  --hover: rgb(142 68 88 / 0.08);
   /* The canvas reads these (components/embroidery/editor.ts) */
-  --ke-surround: #ecdcc6;
+  --ke-surround: #e3e1d6;
   --ke-fabric: #fcf9f2;
-  --ke-accent: #a3401c;
-  --ke-shadow: rgb(80 40 10 / 0.22);
+  --ke-accent: #8e4458;
+  --ke-shadow: rgb(40 35 10 / 0.22);
 }
 
 .designer {
@@ -25,22 +25,22 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme='light']) .designer,
   :root:not([data-theme='light']) .template-editor {
-    --line-strong: #6b5242;
-    --hover: rgb(240 149 107 / 0.12);
-    --ke-surround: #15100c;
+    --line-strong: #5a5236;
+    --hover: rgb(217 174 177 / 0.12);
+    --ke-surround: #12110a;
     --ke-fabric: #f1eadf;
-    --ke-accent: #f0956b;
+    --ke-accent: #d9aeb1;
     --ke-shadow: rgb(0 0 0 / 0.6);
   }
 }
 
 :root[data-theme='dark'] .designer,
 :root[data-theme='dark'] .template-editor {
-  --line-strong: #6b5242;
-  --hover: rgb(240 149 107 / 0.12);
-  --ke-surround: #15100c;
+  --line-strong: #5a5236;
+  --hover: rgb(217 174 177 / 0.12);
+  --ke-surround: #12110a;
   --ke-fabric: #f1eadf;
-  --ke-accent: #f0956b;
+  --ke-accent: #d9aeb1;
   --ke-shadow: rgb(0 0 0 / 0.6);
 }
 

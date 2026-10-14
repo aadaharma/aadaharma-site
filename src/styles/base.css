@@ -11,10 +11,6 @@ body {
   line-height: 1.65;
   color: var(--ink);
   background-color: var(--linen);
-  /* A faint woven-linen texture */
-  background-image:
-    repeating-linear-gradient(0deg, var(--weave) 0 1px, transparent 1px 3px),
-    repeating-linear-gradient(90deg, var(--weave) 0 1px, transparent 1px 4px);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -36,17 +32,17 @@ h3 {
 
 h1 {
   font-size: clamp(2.2rem, 1.6rem + 3vw, 3.75rem);
-  color: var(--rust);
+  color: var(--heading);
 }
 
 h2 {
   font-size: clamp(1.6rem, 1.3rem + 1.4vw, 2.3rem);
-  color: var(--ink);
+  color: var(--heading);
 }
 
 h3 {
   font-size: 1.35rem;
-  color: var(--rust);
+  color: var(--heading);
 }
 
 p {
@@ -118,5 +114,43 @@ a:hover {
 @media (prefers-reduced-motion: no-preference) {
   html {
     scroll-behavior: smooth;
+  }
+}
+
+/* The page border: the template chosen in the admin, embroidered down both edges of the
+   window (mirrored on the right) and repeated down the page. Drawn as a mask, so its
+   colour comes from the palette in light and dark mode. Only on wide screens, where
+   there's room beside the content. */
+body:has(> .page-border) {
+  position: relative;
+}
+
+/* Behind everything else on the page, which is left as it is */
+.page-border {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  bottom: 0;
+  width: var(--border-width);
+  --border-width: clamp(4.5rem, calc((100vw - var(--max-width)) / 2 - 4rem), 8.5rem);
+  pointer-events: none;
+  background: var(--border-ink);
+  -webkit-mask: var(--border) 0 0 / 100% auto repeat-y;
+  mask: var(--border) 0 0 / 100% auto repeat-y;
+}
+
+.page-border--left {
+  left: 0.75rem;
+}
+
+.page-border--right {
+  right: 0.75rem;
+  transform: scaleX(-1);
+}
+
+@media (min-width: 80rem) {
+  .page-border {
+    display: block;
   }
 }

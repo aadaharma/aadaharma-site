@@ -1,10 +1,8 @@
 import type { Strings } from '@/lib/i18n'
-import { StitchDivider } from './decorations'
 
 export function Footer({ t }: { t: Strings['footer'] }) {
   return (
     <footer className="site-footer">
-      <StitchDivider />
       <div className="site-footer__inner">
         <div>
           <h2 className="site-footer__title">{t.contactTitle}</h2>
