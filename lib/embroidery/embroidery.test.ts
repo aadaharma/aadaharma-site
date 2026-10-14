@@ -1,0 +1,144 @@
+import assert from 'node:assert/strict'
+import { test } from 'node:test'
+import { motifFrom, motifFromJson, motifToJson, placeMotif } from './motif'
+import { Pattern } from './pattern'
+import { bounds, extract, mirrorHorizontal, mirrorVertical, regionBetween, rotateClockwise, translate } from './regions'
+import { SHAPES } from './shapes'
+import { endpoints, key, pointsBetween, stitchBetween, stitchesAlong, type Key, type Stitches } from './stitches'
+
+const RED = '#bd0603'
+const of = (...keys: Key[]): Stitches => new Map(keys.map((k) => [k, RED]))
+const keys = (s: Stitches) => [...s.keys()].sort()
+
+test('a stitch joins the two points it was made from', () => {
+  for (const [p, q] of [
+    [{ x: 2, y: 3 }, { x: 3, y: 3 }],
+    [{ x: 2, y: 3 }, { x: 2, y: 4 }],
+    [{ x: 2, y: 3 }, { x: 3, y: 4 }],
+    [{ x: 3, y: 3 }, { x: 2, y: 4 }],
+  ]) {
+    const k = stitchBetween(p, q)!
+    assert.deepEqual(new Set(endpoints(k).map((e) => `${e.x},${e.y}`)), new Set([`${p.x},${p.y}`, `${q.x},${q.y}`]))
+    // The same stitch whichever way it's drawn
+    assert.equal(stitchBetween(q, p), k)
+  }
+  assert.equal(stitchBetween({ x: 0, y: 0 }, { x: 2, y: 0 }), null)
+  assert.equal(stitchBetween({ x: 0, y: 0 }, { x: 0, y: 0 }), null)
+})
+
+test('shared cell edges are one stitch', () => {
+  assert.deepEqual(SHAPES['line-right'](4, 5), SHAPES['line-left'](5, 5))
+  assert.deepEqual(SHAPES['line-bottom'](4, 5), SHAPES['line-top'](4, 6))
+})
+
+test('a fast drag still draws a continuous line', () => {
+  for (const [a, b] of [
+    [{ x: 0, y: 0 }, { x: 5, y: 0 }],
+    [{ x: 0, y: 0 }, { x: 4, y: 4 }],
+    [{ x: 0, y: 0 }, { x: -3, y: 2 }],
+    [{ x: 1, y: 7 }, { x: 6, y: 2 }],
+    [{ x: 0, y: 0 }, { x: 7, y: 2 }],
+  ]) {
+    const points = pointsBetween(a, b)
+    assert.deepEqual(points[0], a)
+    assert.deepEqual(points.at(-1), b)
+    // Each point is a neighbour of the one before
+    for (let i = 1; i < points.length; i++) assert.ok(stitchBetween(points[i - 1], points[i]))
+  }
+  assert.deepEqual(stitchesAlong({ x: 0, y: 0 }, { x: 3, y: 3 }), [key('d', 0, 0), key('d', 1, 1), key('d', 2, 2)])
+  assert.deepEqual(stitchesAlong({ x: 2, y: 2 }, { x: 2, y: 2 }), [])
+})
+
+test('undo and redo take back whole steps', () => {
+  const p = new Pattern(10, 10)
+  p.begin()
+  for (const k of stitchesAlong({ x: 0, y: 0 }, { x: 4, y: 0 })) p.set(k, RED)
+  p.end()
+  p.set(key('v', 0, 0), RED)
+  assert.equal(p.stitches.size, 5)
+  p.undo()
+  assert.equal(p.stitches.size, 4)
+  p.undo()
+  assert.equal(p.stitches.size, 0)
+  assert.equal(p.canUndo, false)
+  p.redo()
+  assert.equal(p.stitches.size, 4)
+  // A new edit drops what could have been redone
+  p.set(key('h', 5, 5), RED)
+  assert.equal(p.canRedo, false)
+})
+
+test('undo restores recoloured and erased stitches', () => {
+  const p = new Pattern(10, 10)
+  p.set(key('h', 0, 0), RED)
+  p.edit(() => {
+    p.set(key('h', 0, 0), '#000000')
+    p.set(key('h', 0, 0), undefined)
+  })
+  assert.equal(p.stitches.size, 0)
+  p.undo()
+  assert.equal(p.stitches.get(key('h', 0, 0)), RED)
+})
+
+test('stitches outside the grid are not drawn', () => {
+  const p = new Pattern(3, 3)
+  p.set(key('h', 3, 0), RED)
+  p.set(key('v', 3, 0), RED) // the grid's right border is inside
+  assert.deepEqual(keys(p.stitches), [key('v', 3, 0)])
+  p.resize(2, 2)
+  assert.equal(p.stitches.size, 0)
+})
+
+test('a selection holds the stitches inside it, moved to the corner', () => {
+  const all = of(key('h', 2, 2), key('v', 4, 2), key('d', 3, 3), key('h', 9, 9))
+  const r = regionBetween({ x: 3, y: 3 }, { x: 2, y: 2 }) // corners in either order
+  assert.deepEqual(r, { x: 2, y: 2, width: 2, height: 2 })
+  assert.deepEqual(keys(extract(all, r)), [key('d', 1, 1), key('h', 0, 0), key('v', 2, 0)].sort())
+})
+
+test('mirroring flips diagonals, and twice gives the original', () => {
+  const piece = of(key('d', 0, 0), key('h', 0, 0), key('v', 2, 1))
+  const flipped = mirrorHorizontal(piece, 2)
+  assert.deepEqual(keys(flipped), [key('a', 1, 0), key('h', 1, 0), key('v', 0, 1)].sort())
+  assert.deepEqual(keys(mirrorHorizontal(flipped, 2)), keys(piece))
+  assert.deepEqual(keys(mirrorVertical(mirrorVertical(piece, 2), 2)), keys(piece))
+})
+
+test('four quarter turns give the original', () => {
+  const piece = of(key('d', 0, 0), key('h', 1, 0), key('v', 2, 1), key('a', 1, 2))
+  let s = piece
+  let [w, h] = [2, 3]
+  for (let i = 0; i < 4; i++) {
+    s = rotateClockwise(s, h)
+    ;[w, h] = [h, w]
+  }
+  assert.deepEqual(keys(s), keys(piece))
+  // A horizontal line turns vertical
+  assert.deepEqual(keys(rotateClockwise(of(key('h', 0, 0)), 1)), [key('v', 1, 0)])
+})
+
+test('a motif survives saving and is trimmed to its stitches', () => {
+  const motif = motifFrom(translate(of(key('d', 0, 0), key('h', 1, 2)), 5, 4))!
+  assert.deepEqual({ w: motif.width, h: motif.height }, { w: 2, h: 2 })
+  assert.deepEqual(bounds(motif.stitches), { x: 0, y: 0, width: 2, height: 2 })
+  const back = motifFromJson(JSON.parse(JSON.stringify(motifToJson(motif))))!
+  assert.deepEqual(keys(back.stitches), keys(motif.stitches))
+})
+
+test('broken motif JSON is refused', () => {
+  assert.equal(motifFromJson(null), null)
+  assert.equal(motifFromJson({ width: 2, height: 2, stitches: { red: ['h:0,0'] } }), null)
+  assert.equal(motifFromJson({ width: 2, height: 2, stitches: { [RED]: ['x:0,0'] } }), null)
+  assert.equal(motifFromJson({ width: 2, height: 2, stitches: { [RED]: ['h:5,0'] } }), null)
+  assert.equal(motifFromJson({ width: 0, height: 2, stitches: {} }), null)
+})
+
+test('placing a motif is one undo step and can recolour it', () => {
+  const p = new Pattern(20, 20)
+  const motif = motifFrom(of(key('d', 0, 0), key('a', 0, 0)))!
+  placeMotif(p, motif, 3, 4, '#000000')
+  assert.deepEqual(keys(p.stitches), [key('a', 3, 4), key('d', 3, 4)])
+  assert.equal(p.stitches.get(key('d', 3, 4)), '#000000')
+  p.undo()
+  assert.equal(p.stitches.size, 0)
+})
