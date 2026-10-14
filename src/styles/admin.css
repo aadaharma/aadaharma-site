@@ -122,6 +122,9 @@ button:disabled {
 
 .field {
   display: grid;
+  /* Fields in a row are stretched to the tallest one; keep each field's parts at the top
+     instead of spreading them out, so the boxes line up */
+  align-content: start;
   gap: 0.3rem;
   min-width: 0;
 }
@@ -141,6 +144,12 @@ button:disabled {
   background: var(--linen);
   color: var(--ink);
   font: inherit;
+}
+
+/* Text boxes, dropdowns and date pickers come out at different heights by default */
+.field input:not([type='checkbox']),
+.field select {
+  height: 2.75rem;
 }
 
 .field textarea {
