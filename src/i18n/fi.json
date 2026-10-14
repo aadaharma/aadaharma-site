@@ -33,7 +33,7 @@
     },
     "knittingCard": {
       "tag": "Työn alla",
-      "title": "Villapaitamallien generaattori",
+      "title": "Neulemallien generaattori",
       "text": "Tuleva työkalu neulemallien suunnitteluun. Ideana on, että voit syöttää omat mitat ja neuletiheyden, ja työkalu laskee silmukka- ja kerrosmäärät.",
       "link": "Lue lisää",
       "mockupAlt": "Luonnos neulemallien generaattorista: kirjoneuleen tähtikaavio ja kahden langan väripaletti"
