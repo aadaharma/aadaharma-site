@@ -29,5 +29,5 @@ export const designerUrl = (lang: Lang) => (lang === 'en' ? '' : `/${lang}`) + '
 // The round yoke sweater calculator, under the Knitting page
 export const yokeUrl = (lang: Lang) => `${pageUrl(lang, 'knitting')}round-yoke/`
 
-// Aada's CV, linked from the home page and the About page once the PDF is in public/
-export const CV_PATH = '/cv/aada-harma-cv.pdf'
+// Aada's CV in each language, linked from the home page and the About page once the PDF is in public/
+export const cvPath = (lang: Lang) => `/cv/aada-harma-cv-${lang}.pdf`

@@ -1,6 +1,6 @@
 import { HillsScene, type SceneLink } from '@/components/home/HillsScene'
 import { hasCv } from '@/lib/cv'
-import { CV_PATH, designerUrl, getStrings, pageUrl, yokeUrl, type Lang } from '@/lib/i18n'
+import { cvPath, designerUrl, getStrings, pageUrl, yokeUrl, type Lang } from '@/lib/i18n'
 import type { CreatureKey } from '@/lib/home/creatures'
 import { pageMetadata } from '@/lib/metadata'
 
@@ -16,7 +16,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
     knitting: { href: yokeUrl(lang) },
     patterns: { href: pageUrl(lang, 'patterns') },
     about: { href: pageUrl(lang, 'about') },
-    cv: hasCv() ? { href: CV_PATH, download: true } : null,
+    cv: hasCv(lang) ? { href: cvPath(lang), download: true } : null,
   }
   return (
     <>
