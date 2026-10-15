@@ -1,32 +1,67 @@
-/* Home: Aada's collage of hills under a blue sky, edge to edge, with an embroidered creature on
-   each hilltop (components/home/HillsScene.tsx). The footer sits below it on the linen. */
+/* Home: Aada's collage of hills under the sky, edge to edge, with an embroidered creature on
+   each hilltop (components/home/HillsScene.tsx). The collage is in layers, each placed as a
+   share of the whole picture: side by side as she made it (--x, --y, --w), or stacked up the
+   screen on a phone held upright (--px, --py, --pw). The footer sits below it on the linen. */
 .hills {
   position: relative;
+  aspect-ratio: var(--wide);
+  overflow: hidden;
+  container-type: inline-size;
 }
 
-.hills__pan {
-  overflow-x: auto;
-  overflow-y: hidden;
-  overscroll-behavior-x: contain;
-  scrollbar-width: none;
+.hills__defs {
+  position: absolute;
+  width: 0;
+  height: 0;
 }
 
-.hills__pan::-webkit-scrollbar {
-  display: none;
+.hills__sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 0;
 }
 
-.hills__scene {
+.hills__layer {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  pointer-events: none;
+}
+
+.hills__layer img {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 
-/* Each creature stands on its hilltop (--x, --y, in the picture's pixels) */
+/* A shadow under OH, HELLO! lifts it off the clouds (in cqw, so it scales with the picture) */
+.hills__layer--hello img {
+  filter: drop-shadow(0 0.14cqw 0.08cqw rgb(26 20 8 / 0.42)) drop-shadow(0 0.35cqw 0.9cqw rgb(26 20 8 / 0.38));
+}
+
+/* Each creature's thread colour suits what's behind it, which differs between the layouts */
+.creature__thread {
+  filter: var(--dye-wide);
+}
+
+/* The creature stands on top of its hill, above the layer's box */
+.hills__layer svg {
+  position: absolute;
+  inset: 0;
+  overflow: visible;
+}
+
+/* Each creature stands on its hilltop (--cx, --cy, in its layer's pixels) */
 .creature__spot {
-  transform: translate(var(--x), var(--y)) scale(var(--creature-scale, 1));
+  transform: translate(var(--cx), var(--cy)) scale(var(--creature-scale, 1));
 }
 
 .creature {
+  pointer-events: auto;
   cursor: pointer;
   outline: none;
 }
@@ -203,44 +238,22 @@
   text-wrap: balance;
 }
 
-.hills__swipe {
-  display: none;
-}
-
-/* On a phone held upright the picture is a tall panorama to swipe along, so the creatures stay
-   big enough to tap */
-@media (max-width: 760px) and (orientation: portrait) {
+/* On a phone held upright the hills stack up the screen, each one's foot hidden behind the
+   next, and the creatures shrink a little so they don't crowd each other */
+@media (orientation: portrait) and (max-width: 1000px) {
   .hills {
-    --creature-scale: 1.25;
+    aspect-ratio: var(--tall);
   }
 
-  .hills__scene {
-    --h: min(68svh, 560px);
-    width: calc(var(--h) * 16 / 9);
-    height: var(--h);
-    max-width: none;
+  .hills__layer {
+    --creature-scale: calc(0.85 * var(--grown));
+    left: var(--px);
+    top: var(--py);
+    width: var(--pw);
   }
 
-  .hills__swipe {
-    display: block;
-    position: absolute;
-    left: 50%;
-    bottom: 14px;
-    transform: translateX(-50%);
-    padding: 5px 12px 6px;
-    background: #fffaf3;
-    color: var(--rust);
-    font: 13px/1.2 var(--font-display);
-    border-radius: 4px;
-    outline: 1.5px dashed var(--saffron-soft);
-    outline-offset: -4px;
-    box-shadow: 0 6px 14px -8px rgb(60 30 10 / 0.5);
-    pointer-events: none;
-    transition: opacity 0.4s;
-  }
-
-  .hills__swipe.is-gone {
-    opacity: 0;
+  .creature__thread {
+    filter: var(--dye-phone);
   }
 }
 
