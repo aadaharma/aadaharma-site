@@ -1,4 +1,5 @@
-import { AppFrame, Star } from '@/components/decorations'
+import { AppFrame } from '@/components/decorations'
+import { HeroDither } from '@/components/HeroDither'
 import { getStrings, pageUrl, type Lang } from '@/lib/i18n'
 import { knitMockup, libraryMockup } from '@/lib/knit-art'
 import { pageMetadata } from '@/lib/metadata'
@@ -23,8 +24,8 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
             {t.cta} <span aria-hidden="true">→</span>
           </a>
         </div>
-        <div className="hero__art" aria-hidden="true">
-          <Star size={260} />
+        <div className="hero__art">
+          <HeroDither alt={t.heroPhotoAlt} />
         </div>
       </section>
 

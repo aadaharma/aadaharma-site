@@ -24,6 +24,7 @@
     "title": "Työkaluja kädentaitojen oppimiseen ja projektien suunnitteluun",
     "lead": "Moi, olen Aada, netissä myös BoingoDuck. Olen kädentaitojen harrastaja ja tekniikan opiskelija. Teen pieniä verkkotyökaluja, jotka tekevät mallien suunnittelusta helpompaa ja saavutettavampaa kaikille.",
     "cta": "Tutustu kirjontatyökaluun",
+    "heroPhotoAlt": "Kädet neulovat tummaa lankaa pyöröpuikolla",
     "projectsTitle": "Projektit",
     "embroideryCard": {
       "tag": "Käytettävissä",
@@ -51,7 +52,7 @@
         "Valmistuin hiljattain tekniikan kandidaatiksi ja jatkan nyt opintojani diplomi-insinöörin tutkinto-ohjelmassa Tampereen yliopistossa. Pääaineeni on tietoliikennetekniikka ja sivuaineeni taloustiede.",
         "Tekniikan lisäksi harrastan kaikenlaisia kädentaitoja neulomisesta puunveistoon. Tämä sivusto on harrastusprojektini, jossa yhdistän teknisen osaamiseni ja intohimoni kädentaitoihin."
       ],
-      "portraitAlt": "Aadan muotokuva"
+      "portraitAlt": "Aada neuloo punaisilla puikoilla"
     }
   },
   "embroidery": {
