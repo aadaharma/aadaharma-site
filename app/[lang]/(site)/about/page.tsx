@@ -1,5 +1,5 @@
 import { hasCv } from '@/lib/cv'
-import { CV_PATH, getStrings, type Lang } from '@/lib/i18n'
+import { cvPath, getStrings, type Lang } from '@/lib/i18n'
 import { pageMetadata } from '@/lib/metadata'
 
 export async function generateMetadata({ params }: PageProps<'/[lang]/about'>) {
@@ -19,8 +19,8 @@ export default async function AboutPage({ params }: PageProps<'/[lang]/about'>) 
         {t.paragraphs.map((p) => (
           <p key={p}>{p}</p>
         ))}
-        {hasCv() && (
-          <a className="button about-page__cv" href={CV_PATH} download>
+        {hasCv(lang) && (
+          <a className="button about-page__cv" href={cvPath(lang)} download>
             <svg viewBox="0 0 18 18" width="18" height="18" aria-hidden="true">
               <path d="M9 2V12M4.5 8L9 12.5 13.5 8M3 16H15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
