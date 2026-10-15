@@ -1,28 +1,35 @@
-// The page border: a template drawn as an SVG, one line per stitch, for the site to use as
-// a CSS mask down the edges of the window (components/PageBorder.tsx)
+// The page border: a template redrawn as dots on the same 3 px grid as the dithered page
+// background, so the two look like one cloth (components/PageDecoration.tsx draws it)
 import type { MotifJson } from './motif'
 import { endpoints } from './stitches'
 
-// Each stitch stops a little short of the grid points, so the stitches read as separate,
-// like thread on fabric. The drawing keeps its full height, so repeats join up exactly;
-// a little room at the sides keeps stitches along the edges from being cut in half.
-export function borderSvg({ width, height, stitches }: MotifJson): string {
-  const gap = 0.1
-  const path = Object.values(stitches)
-    .flat()
-    .map((k) => {
-      const [a, b] = endpoints(k)
-      const dx = b.x - a.x, dy = b.y - a.y
-      const t = gap / Math.hypot(dx, dy)
-      const n = (v: number) => +v.toFixed(2)
-      return `M${n(a.x + dx * t)} ${n(a.y + dy * t)}L${n(b.x - dx * t)} ${n(b.y - dy * t)}`
-    })
-    .join('')
-  return (
-    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="-0.3 0 ${width + 0.6} ${height}">` +
-    `<path d="${path}" fill="none" stroke="#000" stroke-width="0.3" stroke-linecap="round"/></svg>`
-  )
+// What the browser needs to draw the border: each stitch as the two grid points it joins
+export type Border = { width: number; height: number; stitches: [number, number, number, number][] }
+
+export function borderFromMotif({ width, height, stitches }: MotifJson): Border {
+  return {
+    width,
+    height,
+    stitches: Object.values(stitches)
+      .flat()
+      .map((k) => {
+        const [a, b] = endpoints(k)
+        return [a.x, a.y, b.x, b.y]
+      }),
+  }
 }
 
-// As a CSS url() value
-export const borderMask = (motif: MotifJson) => `url("data:image/svg+xml,${encodeURIComponent(borderSvg(motif))}")`
+// One repeat of the border as dots, `scale` dots per stitch: a row-major grid, 1 where a
+// stitch passes. Stitches share the dots at their grid points, so lines join up. The bottom
+// row of grid points is the top row of the next repeat, so it wraps round to the top.
+export function borderDots({ width, height, stitches }: Border, scale: number) {
+  const w = width * scale + 1, h = height * scale
+  const dots = new Uint8Array(w * h)
+  for (const [ax, ay, bx, by] of stitches) {
+    for (let i = 0; i <= scale; i++) {
+      const x = ax * scale + (bx - ax) * i, y = (ay * scale + (by - ay) * i) % h
+      dots[y * w + x] = 1
+    }
+  }
+  return { w, h, dots }
+}

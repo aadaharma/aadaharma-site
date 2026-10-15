@@ -27,6 +27,8 @@
   .skip-link,
   .site-header,
   .site-footer,
+  .page-dither,
+  .page-border,
   .no-print {
     display: none !important;
   }
