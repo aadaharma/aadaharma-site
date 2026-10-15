@@ -50,6 +50,22 @@ npx vercel env pull .env.local
 To add a page, add its name to `PAGES` in `lib/i18n.ts`, create
 `app/[lang]/<page>/page.tsx` (copy an existing one), and add its strings to both JSON files.
 
+## Home and About pages
+
+The home page has no words: Aada's collage of hills (`public/img/hills.webp`) with an
+embroidered creature on each hilltop, and the footer, but no header. Each creature is a link
+to the designer, the round yoke calculator, the pattern library, the About page or the CV.
+
+- The creatures come from Aada's elämänpuu template in the admin (template 21).
+  `npm run home:creatures` reads it from the database and writes
+  `lib/home/creatures.json`: each thread colour is a creature, with the gold thing hanging
+  from its beak. Where they stand and how they sit is in `lib/home/creatures.ts`.
+- Every stitch is the same stitch of real thread, `public/img/stitch.png`, cut from a photo
+  of Aada's embroidered bookmark and dyed white or red. `components/home/HillsScene.tsx`
+  draws them and the hover tags.
+- The CV: put the PDF at `public/cv/aada-harma-cv.pdf`. Until it's there, the CV bird is
+  just a bird and the About page (`/about/`) has no download button.
+
 ## Karelian Embroidery Designer
 
 The designer is at `/karelianembroiderymaker/` (and `/fi/karelianembroiderymaker/`):

@@ -1,5 +1,4 @@
-// Shared by the dotted page border (components/PageDecoration.tsx) and the home page's
-// dithered hero photo (components/HeroDither.tsx). Browser only.
+// Used by the dotted page border (components/PageDecoration.tsx). Browser only.
 
 // A palette colour as [r, g, b]. color-mix() colours come back as color(srgb 0–1 values).
 export function rgb(name: string): number[] {

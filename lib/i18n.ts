@@ -7,7 +7,7 @@ export const LANGS = ['en', 'fi'] as const
 export type Lang = (typeof LANGS)[number]
 export type Strings = typeof en
 
-export const PAGES = ['home', 'embroidery', 'knitting', 'patterns'] as const
+export const PAGES = ['home', 'embroidery', 'knitting', 'patterns', 'about'] as const
 export type Page = (typeof PAGES)[number]
 
 export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aadaharma.com'
@@ -28,3 +28,6 @@ export const designerUrl = (lang: Lang) => (lang === 'en' ? '' : `/${lang}`) + '
 
 // The round yoke sweater calculator, under the Knitting page
 export const yokeUrl = (lang: Lang) => `${pageUrl(lang, 'knitting')}round-yoke/`
+
+// Aada's CV, linked from the home page and the About page once the PDF is in public/
+export const CV_PATH = '/cv/aada-harma-cv.pdf'

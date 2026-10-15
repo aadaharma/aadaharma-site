@@ -106,22 +106,6 @@ export function swatch(style: number, w = 240, h = 180) {
   return `<svg class="swatch" viewBox="0 0 ${w} ${h}" aria-hidden="true" focusable="false">${out}</svg>`
 }
 
-// Mockup of the pattern library: filter chips over three pattern cards.
-export function libraryMockup(label: string) {
-  let out = rect(0, 0, 320, 180, 'k-screen')
-  for (let i = 0; i < 3; i++) out += rect(16 + i * 46, 14, 40, 12, i === 0 ? 'k-accent' : 'k-chrome', ' rx="6"')
-  for (let i = 0; i < 3; i++) {
-    const x = 16 + i * 98
-    out += rect(x, 38, 90, 128, 'k-paper k-outline', ' rx="4"')
-    out += `<svg x="${x}" y="38" width="90" height="64" viewBox="0 0 240 180" preserveAspectRatio="xMidYMid slice">${swatch(i).replace(/^<svg[^>]*>|<\/svg>$/g, '')}</svg>`
-    out += rect(x + 8, 112, 60, 8, 'k-accent', ' rx="2"')
-    out += rect(x + 8, 128, 72, 5, 'k-line', ' rx="2"')
-    out += rect(x + 8, 138, 50, 5, 'k-line', ' rx="2"')
-    out += rect(x + 8, 150, 26, 8, 'k-chrome', ' rx="4"')
-  }
-  return `<svg viewBox="0 0 320 180" role="img" aria-label="${escapeAttr(label)}">${out}</svg>`
-}
-
 // Two stars side by side, for the pattern library hero.
 export function starPair() {
   const s = 10
