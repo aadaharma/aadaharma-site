@@ -6,6 +6,14 @@
   padding-top: clamp(2rem, 6vw, 4.5rem);
 }
 
+/* Text sits on solid boxes, so the background's dots never run behind it */
+.hero__text,
+.about__text {
+  background: var(--surface);
+  padding: clamp(1.25rem, 3vw, 2.25rem);
+  border-radius: var(--radius);
+}
+
 /* Let grid children shrink below their images' intrinsic width */
 .hero > *,
 .about > * {

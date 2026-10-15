@@ -3,7 +3,6 @@
 import { usePathname } from 'next/navigation'
 import { otherLang, pageUrl, PAGES, yokeUrl, type Lang, type Page, type Strings } from '@/lib/i18n'
 import { Star } from './decorations'
-import { ThemeToggle } from './ThemeToggle'
 
 // Which page the address belongs to: /fi/patterns/selbu/ -> pattern, /knitting/ -> knitting
 function currentPage(pathname: string): Page | 'pattern' | 'yoke' | null {
@@ -71,9 +70,6 @@ export function Header({ lang, t }: Props) {
                   <span className="visually-hidden">{t.langSwitch.label}</span>
                   <span aria-hidden="true">{t.langSwitch.short}</span>
                 </a>
-              </li>
-              <li>
-                <ThemeToggle t={t.theme} />
               </li>
             </ul>
           </nav>

@@ -6,9 +6,12 @@ import type { Strings } from '@/lib/i18n'
 type Theme = 'auto' | 'light' | 'dark'
 const ORDER: Theme[] = ['auto', 'light', 'dark']
 
-// Applies the saved theme before the page paints, so there's no flash of the wrong colours.
-// Runs as an inline script in the <head> (see app/[lang]/layout.tsx).
-export const themeScript = `document.documentElement.classList.add('js');try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}`
+// Runs as an inline script in the <head> (see components/SiteDocument.tsx). Dark mode is
+// switched off for now: pages are always light (data-theme="light" on <html>) and the toggle
+// isn't shown. To bring it back, put the toggle back in the header and the designer, drop
+// data-theme from <html>, and read the saved theme here again:
+// try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.dataset.theme=t}catch(e){}
+export const themeScript = `document.documentElement.classList.add('js')`
 
 // Theme toggle: auto (follow the system) -> light -> dark
 export function ThemeToggle({ t }: { t: Strings['theme'] }) {

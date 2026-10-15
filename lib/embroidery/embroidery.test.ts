@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { motifFrom, motifFromJson, motifToJson, placeMotif, TEMPLATE_MAX } from './motif'
-import { borderMask, borderSvg } from './border'
+import { borderDots, borderFromMotif } from './border'
 import { BUILT_IN_TEMPLATES, isCategory } from './motifs'
 import { Pattern } from './pattern'
 import {
@@ -231,11 +231,20 @@ test('templates can be taller than designs', () => {
   assert.equal(motifFromJson({ ...tall, width: 201 }, TEMPLATE_MAX), null)
 })
 
-test('the page border draws every stitch, a little short of its grid points', () => {
-  const svg = borderSvg({ width: 2, height: 3, stitches: { [RED]: ['h:0,0', 'v:0,0', 'd:1,1'] } })
-  assert.match(svg, /viewBox="-0\.3 0 2\.6 3"/)
-  assert.equal(svg.match(/M/g)?.length, 3)
-  assert.ok(svg.includes('M0.1 0L0.9 0'))
-  assert.ok(svg.includes('M0 0.1L0 0.9'))
-  assert.ok(borderMask({ width: 1, height: 1, stitches: {} }).startsWith('url("data:image/svg+xml,'))
+test('the page border becomes dots, joined at the grid points and wrapping round', () => {
+  const border = borderFromMotif({ width: 2, height: 3, stitches: { [RED]: ['h:0,0', 'v:0,0', 'd:1,1', 'v:1,2'] } })
+  assert.deepEqual(border.stitches, [[0, 0, 1, 0], [0, 0, 0, 1], [1, 1, 2, 2], [1, 2, 1, 3]])
+  const { w, h, dots } = borderDots(border, 3)
+  assert.equal(w, 7)
+  assert.equal(h, 9)
+  const on = (x: number, y: number) => dots[y * w + x] === 1
+  // h:0,0 and v:0,0 share the corner dot
+  for (const x of [0, 1, 2, 3]) assert.ok(on(x, 0))
+  for (const y of [0, 1, 2, 3]) assert.ok(on(0, y))
+  // The diagonal runs corner to corner
+  for (const i of [0, 1, 2, 3]) assert.ok(on(3 + i, 3 + i))
+  // v:1,2 ends on the bottom grid row, which is the top of the next repeat
+  for (const y of [6, 7, 8]) assert.ok(on(3, y))
+  assert.ok(on(3, 0))
+  assert.ok(!on(5, 0))
 })

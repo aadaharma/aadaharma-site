@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { ThemeToggle } from '@/components/ThemeToggle'
 import { isOneColour, motifFromJson, motifToJson, TEMPLATE_MAX, type Motif } from '@/lib/embroidery/motif'
 import { CATEGORIES, type TemplateJson } from '@/lib/embroidery/motifs'
 import { Pattern } from '@/lib/embroidery/pattern'
@@ -29,7 +28,7 @@ function loadPattern() {
 
 type Toast = { message: string; action?: { label: string; run: () => void } }
 
-export function Designer({ lang, t, theme, switchLabel, templates }: Props) {
+export function Designer({ lang, t, switchLabel, templates }: Props) {
   const [toast, setToast] = useState<Toast | null>(null)
   const [panelOpen, setPanelOpen] = useState(false)
   const { hostRef, editor, state } = useEditor(loadPattern, () => setToast({ message: t.toast.copied }))
@@ -103,9 +102,6 @@ export function Designer({ lang, t, theme, switchLabel, templates }: Props) {
             <span className="visually-hidden">{switchLabel.label}</span>
             <span aria-hidden="true">{switchLabel.short}</span>
           </a>
-          <span className="hide-small">
-            <ThemeToggle t={theme} />
-          </span>
           <IconButton icon="menu" label={t.openPanel} onClick={() => setPanelOpen(true)} className="panel-toggle" />
         </div>
       </header>
@@ -146,10 +142,6 @@ export function Designer({ lang, t, theme, switchLabel, templates }: Props) {
               }}
             />
           </Section>
-          {/* The theme switch is in the top bar on wider screens */}
-          <div className="designer-side__theme">
-            <ThemeToggle t={theme} />
-          </div>
           <Section title={t.grid.title}>
             <GridSize
               key={`${state.width}x${state.height}`}
