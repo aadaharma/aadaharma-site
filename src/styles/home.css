@@ -31,11 +31,6 @@
   pointer-events: none;
 }
 
-/* What's being pointed at comes to the front, so no hill in front hides it */
-.hills__layer.is-active {
-  z-index: 2;
-}
-
 .hills__layer img {
   display: block;
   width: 100%;

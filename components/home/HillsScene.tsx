@@ -250,7 +250,7 @@ export function HillsScene({ label, words, links }: Props) {
       </svg>
       <img className="hills__sky" src={SKY} alt="" width={SCENE.width} height={SCENE.height} fetchPriority="high" />
       {LAYERS.map((l) => (
-        <div key={l.name} className={`hills__layer${l.creature === active ? ' is-active' : ''}`} style={layerStyle(l)}>
+        <div key={l.name} className="hills__layer" style={layerStyle(l)}>
           <img src={l.src} alt="" width={l.size[0]} height={l.size[1]} />
           {l.creature && l.spot && (
             <svg viewBox={`0 0 ${l.size[0]} ${l.size[1]}`} aria-hidden={links[l.creature] ? undefined : true}>
