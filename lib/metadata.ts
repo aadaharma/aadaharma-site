@@ -4,11 +4,9 @@ import { designerUrl, getStrings, LANGS, pageUrl, SITE_URL, yokeUrl, type Lang, 
 const OG_IMAGE = '/img/bookmark.webp'
 
 export const viewport: Viewport = {
-  colorScheme: 'light dark',
-  themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f6ece0' },
-    { media: '(prefers-color-scheme: dark)', color: '#1c1410' },
-  ],
+  // Dark mode is switched off for now (components/ThemeToggle.tsx)
+  colorScheme: 'light',
+  themeColor: '#fbf0f8',
 }
 
 type Meta = { title: string; description: string; path: string | null; alternates?: Record<string, string> }

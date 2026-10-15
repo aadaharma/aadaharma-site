@@ -12,7 +12,8 @@
 
 /* Gold, pink & maroon: a pale pink page with maroon headings, links and buttons, and gold
    for tags and the page border. Dark mode is near-black maroon with pink links and gold.
-   The theme follows the system unless the header toggle sets data-theme. */
+   Dark mode is switched off for now: <html> always has data-theme="light", so the dark
+   colours below aren't used (see components/ThemeToggle.tsx). */
 :root {
   --linen: #fbf0f8;
   --surface: #fffafd;

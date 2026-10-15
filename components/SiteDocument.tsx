@@ -10,9 +10,10 @@ import { themeScript } from './ThemeToggle'
 // (for the site pages and the embroidery designer) and the 404 page.
 export function Document({ lang, children }: { lang: Lang; children: ReactNode }) {
   return (
-    // The theme script adds a class and data-theme to <html> before React hydrates
+    // The head script adds the js class to <html> before React hydrates
+    // data-theme="light": dark mode is switched off for now, even if the system is dark
     // data-scroll-behavior: the CSS scrolls smoothly, which Next.js turns off while changing pages
-    <html lang={lang} suppressHydrationWarning data-scroll-behavior="smooth">
+    <html lang={lang} suppressHydrationWarning data-scroll-behavior="smooth" data-theme="light">
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
         <link rel="icon" href="/favicon.ico" />
