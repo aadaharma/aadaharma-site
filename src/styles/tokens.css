@@ -10,14 +10,14 @@
   font-display: swap;
 }
 
-/* Gold, pink & maroon on natural linen: maroon headings, links and buttons, gold for tags
+/* Gold, pink & maroon on pink-washed linen: maroon headings, links and buttons, gold for tags
    and the page border, pink as the third thread colour. The linen weave itself is a photo
    multiplied over --linen (src/styles/base.css).
    Dark mode is near-black maroon with pink links and gold.
    Dark mode is switched off for now: <html> always has data-theme="light", so the dark
    colours below aren't used (see components/ThemeToggle.tsx). */
 :root {
-  --linen: #ece3d2;
+  --linen: #f6e4ec;
   --surface: #fffafd;
   --chrome: color-mix(in srgb, var(--ink) 6%, var(--surface));
   --ink: #2b0b0b;
