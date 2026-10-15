@@ -371,7 +371,6 @@ figcaption {
 
 /* Footer */
 .site-footer {
-  margin-top: var(--space);
   padding-bottom: 2rem;
 }
 
@@ -383,7 +382,7 @@ figcaption {
   justify-content: space-between;
   align-items: flex-end;
   gap: 1.5rem;
-  padding-top: 2rem;
+  padding-top: 2.5rem;
 }
 
 .site-footer__title {
