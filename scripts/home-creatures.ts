@@ -1,7 +1,7 @@
 // Takes the home page's creatures from Aada's elämänpuu template in the database and writes
 // them to lib/home/creatures.json. Each creature is one thread colour of the drawing plus the
 // gold item hanging from its beak (gold pieces belong to the creature they touch). The tree
-// itself isn't used: the creatures stand on the hills of public/img/hills.webp instead.
+// itself isn't used: the creatures stand on the hills of public/img/home/ instead.
 //
 //   npm run home:creatures            # template 21
 //   npm run home:creatures -- 25      # another template

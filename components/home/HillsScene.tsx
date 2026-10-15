@@ -1,12 +1,13 @@
 'use client'
 
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode } from 'react'
-import { CELL, CREATURE_KEYS, CREATURES, HILLS, POSE, SCENE, THREAD, type CreatureKey } from '@/lib/home/creatures'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react'
+import { CELL, CREATURES, LAYERS, PHONE, POSE, SCENE, SKY, THREAD, type CreatureKey, type Layer } from '@/lib/home/creatures'
 import { endpoints, type Key } from '@/lib/embroidery/stitches'
 import { TagPicture } from './TagPicture'
 
-// The home page: Aada's collage of hills under a blue sky, with an embroidered creature on
-// each hilltop. Each creature is a link; pointing at it, focusing it or tapping it once
+// The home page: Aada's collage of hills under the sky, with an embroidered creature on
+// each hilltop. The collage is in layers, so on a phone held upright the hills can stack up
+// the screen instead of standing side by side. Each creature is a link; pointing at it, focusing it or tapping it once
 // makes it hop, swings what it holds and hangs a little tag saying where it leads.
 
 // Every stitch is the same stitch of real thread, cut from a photo of Aada's bookmark
@@ -22,7 +23,6 @@ const r1 = (n: number) => Math.round(n * 10) / 10
 export type SceneLink = { href: string; download?: boolean } | null
 type Props = {
   label: string
-  swipe: string
   words: Record<CreatureKey, string>
   links: Record<CreatureKey, SceneLink>
 }
@@ -112,13 +112,12 @@ function Dye({ id, colour }: { id: string; colour: string }) {
   )
 }
 
-export function HillsScene({ label, swipe, words, links }: Props) {
+export function HillsScene({ label, words, links }: Props) {
   const stage = useRef<HTMLDivElement>(null)
   const tag = useRef<HTMLDivElement>(null)
   const [active, setActive] = useState<CreatureKey | null>(null)
   // What the tag last showed, so it keeps its words while it fades away
   const [last, setLast] = useState<CreatureKey | null>(null)
-  const [swiped, setSwiped] = useState(false)
   // A tap first shows where a creature leads; the second tap goes there. A tap also focuses
   // the link before its click (which shows the tag), so remember what was showing when the
   // finger went down.
@@ -164,87 +163,106 @@ export function HillsScene({ label, swipe, words, links }: Props) {
     }
   }, [place])
 
-  return (
-    <div className="hills" ref={stage}>
-      <div
-        className="hills__pan"
-        onScroll={() => {
-          setSwiped(true)
-          place()
+  const creature = (name: CreatureKey) => {
+    const link = links[name]
+    // Without a link (the CV before there's a PDF) it's just a bird on a hill
+    if (!link) return <Creature name={name} />
+    const show = () => {
+      setActive(name)
+      setLast(name)
+    }
+    const hide = () => setActive((a) => (a === name ? null : a))
+    return (
+      <a
+        className={`creature${active === name ? ' is-active' : ''}`}
+        data-creature={name}
+        href={link.href}
+        download={link.download || undefined}
+        aria-label={words[name]}
+        onPointerDown={(e) => {
+          touch.current = e.pointerType !== 'mouse'
+          wasShown.current = active === name
+        }}
+        onPointerEnter={(e) => e.pointerType === 'mouse' && show()}
+        onPointerLeave={(e) => e.pointerType === 'mouse' && hide()}
+        onFocus={show}
+        onBlur={hide}
+        onClick={(e) => {
+          if (touch.current && !wasShown.current) {
+            e.preventDefault()
+            show()
+            wasShown.current = true
+          }
         }}
       >
-        <svg className="hills__scene" viewBox={`0 0 ${SCENE.width} ${SCENE.height}`} role="group" aria-label={label}>
-          <defs>
-            {[['s', CELL], ['d', CELL * Math.SQRT2]].map(([id, len]) => (
-              <image
-                key={id}
-                id={`stitch-${id}`}
-                href={STITCH.src}
-                x={r1(-END)}
-                y={r1(-THICK / 2)}
-                width={r1(+len + 2 * END)}
-                height={r1(THICK)}
-                preserveAspectRatio="none"
-              />
-            ))}
-            <Dye id="creature" colour={THREAD.creature} />
-            <Dye id="item" colour={THREAD.item} />
-            {/* The thread sits a little above the picture */}
-            <filter id="raised" x="-5%" y="-5%" width="110%" height="110%">
-              <feDropShadow dx="0" dy="2" stdDeviation="1.4" floodColor="#1a1408" floodOpacity="0.45" />
-            </filter>
-          </defs>
-          <image href={SCENE.src} width={SCENE.width} height={SCENE.height} />
-          <g filter="url(#raised)">
-            {CREATURE_KEYS.map((name) => {
-              const link = links[name]
-              const [hx, hy] = HILLS[name]
-              const drawn = (
-                <g className="creature__spot" style={{ ['--x' as string]: `${hx}px`, ['--y' as string]: `${hy}px` }}>
-                  <Creature name={name} />
+        <Creature name={name} />
+      </a>
+    )
+  }
+
+  // Where a layer goes, as shares of the whole picture, wide and on a phone
+  const layerStyle = (l: Layer) => {
+    const [w, h] = l.size
+    const pw = l.phoneWidth ?? w
+    const pct = (n: number, of: number) => `${r1((n / of) * 1e4) / 100}%`
+    return {
+      '--x': pct(l.at[0], SCENE.width),
+      '--y': pct(l.at[1], SCENE.height),
+      '--w': pct(w, SCENE.width),
+      '--px': pct(l.phone[0], PHONE.width),
+      '--py': pct(l.phone[1], PHONE.height),
+      '--pw': pct(pw, PHONE.width),
+      // so a creature on a layer drawn bigger isn't bigger too
+      '--grown': r1((w / pw) * 1000) / 1000,
+      aspectRatio: `${w} / ${h}`,
+    } as CSSProperties
+  }
+
+  return (
+    <div
+      className="hills"
+      ref={stage}
+      role="group"
+      aria-label={label}
+      style={{ '--wide': `${SCENE.width} / ${SCENE.height}`, '--tall': `${PHONE.width} / ${PHONE.height}` } as CSSProperties}
+    >
+      <svg className="hills__defs" aria-hidden="true">
+        <defs>
+          {[['s', CELL], ['d', CELL * Math.SQRT2]].map(([id, len]) => (
+            <image
+              key={id}
+              id={`stitch-${id}`}
+              href={STITCH.src}
+              x={r1(-END)}
+              y={r1(-THICK / 2)}
+              width={r1(+len + 2 * END)}
+              height={r1(THICK)}
+              preserveAspectRatio="none"
+            />
+          ))}
+          <Dye id="creature" colour={THREAD.creature} />
+          <Dye id="item" colour={THREAD.item} />
+          {/* The thread sits a little above the picture */}
+          <filter id="raised" x="-5%" y="-5%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="2" stdDeviation="1.4" floodColor="#1a1408" floodOpacity="0.45" />
+          </filter>
+        </defs>
+      </svg>
+      <img className="hills__sky" src={SKY} alt="" width={SCENE.width} height={SCENE.height} fetchPriority="high" />
+      {LAYERS.map((l) => (
+        <div key={l.name} className={`hills__layer${l.creature === active ? ' is-active' : ''}`} style={layerStyle(l)}>
+          <img src={l.src} alt="" width={l.size[0]} height={l.size[1]} />
+          {l.creature && l.spot && (
+            <svg viewBox={`0 0 ${l.size[0]} ${l.size[1]}`} aria-hidden={links[l.creature] ? undefined : true}>
+              <g filter="url(#raised)">
+                <g className="creature__spot" style={{ ['--cx' as string]: `${l.spot[0]}px`, ['--cy' as string]: `${l.spot[1]}px` }}>
+                  {creature(l.creature)}
                 </g>
-              )
-              // Without a link (the CV before there's a PDF) it's just a bird on a hill
-              if (!link) return <g key={name}>{drawn}</g>
-              const show = () => {
-                setActive(name)
-                setLast(name)
-              }
-              const hide = () => setActive((a) => (a === name ? null : a))
-              return (
-                <a
-                  key={name}
-                  className={`creature${active === name ? ' is-active' : ''}`}
-                  data-creature={name}
-                  href={link.href}
-                  download={link.download || undefined}
-                  aria-label={words[name]}
-                  onPointerDown={(e) => {
-                    touch.current = e.pointerType !== 'mouse'
-                    wasShown.current = active === name
-                  }}
-                  onPointerEnter={(e) => e.pointerType === 'mouse' && show()}
-                  onPointerLeave={(e) => e.pointerType === 'mouse' && hide()}
-                  onFocus={show}
-                  onBlur={hide}
-                  onClick={(e) => {
-                    if (touch.current && !wasShown.current) {
-                      e.preventDefault()
-                      show()
-                      wasShown.current = true
-                    }
-                  }}
-                >
-                  {drawn}
-                </a>
-              )
-            })}
-          </g>
-        </svg>
-      </div>
-      <div className={`hills__swipe${swiped ? ' is-gone' : ''}`} aria-hidden="true">
-        ← {swipe} →
-      </div>
+              </g>
+            </svg>
+          )}
+        </div>
+      ))}
       <div className={`hills__tag${active ? ' is-shown' : ''}`} ref={tag} aria-hidden="true">
         {last && (
           <>

@@ -21,7 +21,7 @@ export default async function HomePage({ params }: PageProps<'/[lang]'>) {
   return (
     <>
       <h1 className="visually-hidden">{t.title}</h1>
-      <HillsScene label={t.sceneLabel} swipe={t.swipe} words={t.creatures} links={links} />
+      <HillsScene label={t.sceneLabel} words={t.creatures} links={links} />
     </>
   )
 }

@@ -22,8 +22,7 @@
     "metaTitle": "Aada Härmä — fibre arts web tools",
     "description": "Web tools for fibre arts: a Karelian embroidery pattern designer, a pattern library, and a knitting pattern generator on the way.",
     "title": "Oh, hello! I’m Aada Härmä, and I make web tools for fibre arts.",
-    "sceneLabel": "Oh, hello! Embroidered birds and a fox on hills under a blue sky. The hills are knitting, a book page and a mossy rock.",
-    "swipe": "swipe",
+    "sceneLabel": "Oh, hello! Embroidered birds and a fox on hills under a cloudy sky. The hills are knitting, a book page and a mossy rock.",
     "creatures": {
       "embroidery": "Embroidery designer",
       "knitting": "Knitting pattern generator",

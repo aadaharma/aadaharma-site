@@ -22,8 +22,7 @@
     "metaTitle": "Aada Härmä — kädentaitojen verkkotyökaluja",
     "description": "Verkkotyökaluja ja neuleohjeita: karjalaisen kirjonnan mallityökalu, neuleohjekirjasto, ja neulemallien generaattori tulossa.",
     "title": "Moi! Olen Aada Härmä, ja teen verkkotyökaluja kädentaitoihin.",
-    "sceneLabel": "Oh, hello! Kirjottuja lintuja ja kettu kukkuloilla sinisen taivaan alla. Kukkulat ovat neuletta, kirjan sivua ja sammaleista kiveä.",
-    "swipe": "pyyhkäise",
+    "sceneLabel": "Oh, hello! Kirjottuja lintuja ja kettu kukkuloilla pilvisen taivaan alla. Kukkulat ovat neuletta, kirjan sivua ja sammaleista kiveä.",
     "creatures": {
       "embroidery": "Kirjontasuunnittelija",
       "knitting": "Neuleohjegeneraattori",
