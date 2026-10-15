@@ -59,5 +59,17 @@ export const POSE: Partial<Record<CreatureKey, { belly?: number; rotate?: number
   cv: { flip: true },
 }
 
-// White thread with red things in their beaks, bright against the sky
-export const THREAD = { creature: '#ffffff', item: '#bd0603' }
+// Ochre creatures (#b98420) carrying maroon things. Each creature's ochre is made darker or
+// lighter so it stands out from what's behind it by at least 3 : 1, measured on the collage
+// separately for each layout: darker against the pale sky, lighter in front of the green
+// cables. If a hill or creature moves, measure again.
+export const THREAD = {
+  item: '#800000',
+  creature: {
+    cv: { wide: '#9d701b', phone: '#ae7c1e' },
+    embroidery: { wide: '#8b6318', phone: '#876017' },
+    patterns: { wide: '#966b1a', phone: '#e4b661' },
+    about: { wide: '#dca337', phone: '#6b4c12' },
+    knitting: { wide: '#6d4e13', phone: '#835d17' },
+  } satisfies Record<CreatureKey, { wide: string; phone: string }>,
+}

@@ -33,9 +33,11 @@ function box(keys: Key[]) {
   return { pts, x0: Math.min(...xs), x1: Math.max(...xs), y0: Math.min(...ys), y1: Math.max(...ys) }
 }
 
-function Stitches({ keys, dye }: { keys: Key[]; dye: string }) {
+// Dyed by a filter: either named here, or (for a creature's body) by its layer through CSS,
+// since each creature's colour depends on the layout
+function Stitches({ keys, dye, className }: { keys: Key[]; dye?: string; className?: string }) {
   return (
-    <g filter={`url(#dye-${dye})`}>
+    <g filter={dye && `url(#dye-${dye})`} className={className}>
       {keys.map((k) => {
         // From the stitch's first end (a / stitch starts at its top right corner)
         const [{ x, y }] = endpoints(k)
@@ -92,7 +94,7 @@ function Creature({ name }: { name: CreatureKey }) {
         ry={r1((y1 - y0) * 0.62 + 14)}
       />
       <g className="creature__bob">
-        <Stitches keys={body} dye="creature" />
+        <Stitches keys={body} className="creature__thread" />
         {held}
       </g>
     </g>
@@ -214,6 +216,10 @@ export function HillsScene({ label, words, links }: Props) {
       '--pw': pct(pw, PHONE.width),
       // so a creature on a layer drawn bigger isn't bigger too
       '--grown': r1((w / pw) * 1000) / 1000,
+      ...(l.creature && {
+        '--dye-wide': `url(#dye-${l.creature}-wide)`,
+        '--dye-phone': `url(#dye-${l.creature}-phone)`,
+      }),
       aspectRatio: `${w} / ${h}`,
     } as CSSProperties
   }
@@ -240,17 +246,20 @@ export function HillsScene({ label, words, links }: Props) {
               preserveAspectRatio="none"
             />
           ))}
-          <Dye id="creature" colour={THREAD.creature} />
+          {Object.entries(THREAD.creature).flatMap(([name, { wide, phone }]) => [
+            <Dye key={`${name}-wide`} id={`${name}-wide`} colour={wide} />,
+            <Dye key={`${name}-phone`} id={`${name}-phone`} colour={phone} />,
+          ])}
           <Dye id="item" colour={THREAD.item} />
           {/* The thread sits a little above the picture */}
           <filter id="raised" x="-5%" y="-5%" width="110%" height="110%">
-            <feDropShadow dx="0" dy="2" stdDeviation="1.4" floodColor="#1a1408" floodOpacity="0.45" />
+            <feDropShadow dx="0" dy="2" stdDeviation="1.4" floodColor="#1a1408" floodOpacity="0.35" />
           </filter>
         </defs>
       </svg>
       <img className="hills__sky" src={SKY} alt="" width={SCENE.width} height={SCENE.height} fetchPriority="high" />
       {LAYERS.map((l) => (
-        <div key={l.name} className="hills__layer" style={layerStyle(l)}>
+        <div key={l.name} className={`hills__layer hills__layer--${l.name}`} style={layerStyle(l)}>
           <img src={l.src} alt="" width={l.size[0]} height={l.size[1]} />
           {l.creature && l.spot && (
             <svg viewBox={`0 0 ${l.size[0]} ${l.size[1]}`} aria-hidden={links[l.creature] ? undefined : true}>

@@ -6,6 +6,7 @@
   position: relative;
   aspect-ratio: var(--wide);
   overflow: hidden;
+  container-type: inline-size;
 }
 
 .hills__defs {
@@ -35,6 +36,16 @@
   display: block;
   width: 100%;
   height: 100%;
+}
+
+/* A shadow under OH, HELLO! lifts it off the clouds (in cqw, so it scales with the picture) */
+.hills__layer--hello img {
+  filter: drop-shadow(0 0.14cqw 0.08cqw rgb(26 20 8 / 0.42)) drop-shadow(0 0.35cqw 0.9cqw rgb(26 20 8 / 0.38));
+}
+
+/* Each creature's thread colour suits what's behind it, which differs between the layouts */
+.creature__thread {
+  filter: var(--dye-wide);
 }
 
 /* The creature stands on top of its hill, above the layer's box */
@@ -239,6 +250,10 @@
     left: var(--px);
     top: var(--py);
     width: var(--pw);
+  }
+
+  .creature__thread {
+    filter: var(--dye-phone);
   }
 }
 
