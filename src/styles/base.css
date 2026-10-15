@@ -4,13 +4,20 @@
   box-sizing: border-box;
 }
 
+/* The page is linen: a grey photo of the weave (public/img/linen.webp, ambientCG Fabric030,
+   CC0) multiplied over the cloth colour, so the weave shows on any colour. The photo is
+   4096 px and shown at half size, so it stays sharp on high-density screens. */
+html {
+  background: var(--linen) url('/img/linen.webp') 0 0 / 2048px 2048px repeat;
+  background-blend-mode: multiply;
+}
+
 body {
   margin: 0;
   font-family: var(--font-body);
   font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
   line-height: 1.65;
   color: var(--ink);
-  background-color: var(--linen);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -89,15 +96,6 @@ a:hover {
   padding-block: var(--space) 0;
 }
 
-/* Section headings get a patch of page colour, so the background's dots stop around them */
-.section > h2 {
-  display: inline-block;
-  padding: 0.1rem 0.6rem;
-  margin-left: -0.6rem;
-  background: var(--linen);
-  border-radius: var(--radius);
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -126,20 +124,8 @@ a:hover {
   }
 }
 
-/* The dithered page background: a canvas behind everything, one dot per 3 px, from the
-   page colour into two tints (components/PageDecoration.tsx draws it) */
-.page-dither {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  width: 100%;
-  height: 100%;
-  image-rendering: pixelated;
-  pointer-events: none;
-}
-
-/* The page border: the template chosen in the admin, drawn as dots on the background's grid
-   down both edges of the window (mirrored on the right) and repeated down the page. Only on
+/* The page border: the template chosen in the admin, drawn as dots on a 3 px grid down both
+   edges of the window (mirrored on the right) and repeated down the page. Only on
    wide screens, where there's room beside the content. */
 body:has(> .page-border) {
   position: relative;

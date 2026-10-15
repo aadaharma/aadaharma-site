@@ -21,38 +21,15 @@
   "home": {
     "metaTitle": "Aada Härmä — kädentaitojen verkkotyökaluja",
     "description": "Verkkotyökaluja ja neuleohjeita: karjalaisen kirjonnan mallityökalu, neuleohjekirjasto, ja neulemallien generaattori tulossa.",
-    "title": "Työkaluja kädentaitojen oppimiseen ja projektien suunnitteluun",
-    "lead": "Moi, olen Aada, netissä myös BoingoDuck. Olen kädentaitojen harrastaja ja tekniikan opiskelija. Teen pieniä verkkotyökaluja, jotka tekevät mallien suunnittelusta helpompaa ja saavutettavampaa kaikille.",
-    "cta": "Tutustu kirjontatyökaluun",
-    "heroPhotoAlt": "Kädet neulovat tummaa lankaa pyöröpuikolla",
-    "projectsTitle": "Projektit",
-    "embroideryCard": {
-      "tag": "Käytettävissä",
-      "title": "Karjalaisen kirjonnan suunnittelija",
-      "text": "Piirrä karjalaisen kirjonnan malleja ruudukolle ja lataa ne PDF-tiedostona.",
-      "link": "Lue lisää"
-    },
-    "knittingCard": {
-      "tag": "Työn alla",
-      "title": "Neulemallien generaattori",
-      "text": "Tuleva työkalu neulemallien suunnitteluun. Ideana on, että voit syöttää omat mitat ja neuletiheyden, ja työkalu laskee silmukka- ja kerrosmäärät.",
-      "link": "Lue lisää",
-      "mockupAlt": "Luonnos neulemallien generaattorista: kirjoneuleen tähtikaavio ja kahden langan väripaletti"
-    },
-    "patternsCard": {
-      "tag": "Uusi",
-      "title": "Neuleohjeet",
-      "text": "Kirjoittamani neuleohjeet: lue, suodata ja tulosta ilmaiseksi.",
-      "link": "Selaa ohjeita",
-      "mockupAlt": "Luonnos neuleohjekirjastosta: suodatinpainikkeet ohjekorttien yläpuolella"
-    },
-    "about": {
-      "title": "Minusta",
-      "paragraphs": [
-        "Valmistuin hiljattain tekniikan kandidaatiksi ja jatkan nyt opintojani diplomi-insinöörin tutkinto-ohjelmassa Tampereen yliopistossa. Pääaineeni on tietoliikennetekniikka ja sivuaineeni taloustiede.",
-        "Tekniikan lisäksi harrastan kaikenlaisia kädentaitoja neulomisesta puunveistoon. Tämä sivusto on harrastusprojektini, jossa yhdistän teknisen osaamiseni ja intohimoni kädentaitoihin."
-      ],
-      "portraitAlt": "Aada neuloo punaisilla puikoilla"
+    "title": "Moi! Olen Aada Härmä, ja teen verkkotyökaluja kädentaitoihin.",
+    "sceneLabel": "Oh, hello! Kirjottuja lintuja ja kettu kukkuloilla sinisen taivaan alla. Kukkulat ovat neuletta, kirjan sivua ja sammaleista kiveä.",
+    "swipe": "pyyhkäise",
+    "creatures": {
+      "embroidery": "Kirjontasuunnittelija",
+      "knitting": "Neuleohjegeneraattori",
+      "patterns": "Neuleohjeet",
+      "about": "Minusta",
+      "cv": "Lataa CV"
     }
   },
   "embroidery": {
@@ -94,7 +71,8 @@
       "Vie kaaviot tulostettaviksi tai neulottaviksi"
     ],
     "meanwhile": "Sillä välin voit selata neuleohjeitani",
-    "yokeCta": "Pyöreän kaarrokkeen laskuri"
+    "yokeCta": "Pyöreän kaarrokkeen laskuri",
+    "mockupAlt": "Luonnos neulemallien generaattorista: kirjoneuleen tähtikaavio ja kahden langan väripaletti"
   },
   "theme": {
     "label": "Väriteema",
@@ -335,5 +313,17 @@
         "moreIncreasesThanStitches": "Lisäyksiä on kerroksella enemmän kuin pääntiellä on silmukoita. Käytä vähemmän lisäyksiä kerroksella."
       }
     }
+  },
+  "about": {
+    "metaTitle": "Minusta — Aada Härmä",
+    "description": "Aada Härmä: verkkotyökaluja kädentaitoihin, opinnot Tampereen yliopistossa ja kaikenlaiset kädentaidot.",
+    "title": "Minusta",
+    "lead": "Moi, olen Aada, netissä myös BoingoDuck. Olen kädentaitojen harrastaja ja tekniikan opiskelija. Teen pieniä verkkotyökaluja, jotka tekevät mallien suunnittelusta helpompaa ja saavutettavampaa kaikille.",
+    "paragraphs": [
+      "Valmistuin hiljattain tekniikan kandidaatiksi ja jatkan nyt opintojani diplomi-insinöörin tutkinto-ohjelmassa Tampereen yliopistossa. Pääaineeni on tietoliikennetekniikka ja sivuaineeni taloustiede.",
+      "Tekniikan lisäksi harrastan kaikenlaisia kädentaitoja neulomisesta puunveistoon. Tämä sivusto on harrastusprojektini, jossa yhdistän teknisen osaamiseni ja intohimoni kädentaitoihin."
+    ],
+    "portraitAlt": "Aada neuloo punaisilla puikoilla, punavalkoisen kirjontakehyksen sisällä",
+    "cv": "Lataa CV"
   }
 }

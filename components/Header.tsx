@@ -63,7 +63,9 @@ export function Header({ lang, t }: Props) {
                 </a>
               </li>
               <li>
-                <a href={`${urls.home}#about`}>{t.nav.about}</a>
+                <a href={urls.about} {...current('about')}>
+                  {t.nav.about}
+                </a>
               </li>
               <li>
                 <a className="pill" href={switchUrl} hrefLang={t.langSwitch.lang} lang={t.langSwitch.lang}>

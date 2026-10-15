@@ -21,39 +21,15 @@
   "home": {
     "metaTitle": "Aada Härmä — fibre arts web tools",
     "description": "Web tools for fibre arts: a Karelian embroidery pattern designer, a pattern library, and a knitting pattern generator on the way.",
-    "title": "Tools for fibre arts: learn new techniques and plan your projects.",
-    "lead": "I'm Aada, also known as BoingoDuck on the internet. I am a fibre arts enthusiast and an engineering student. I build small web tools that make pattern design easier and more accessible to everyone.",
-    "cta": "See the embroidery designer",
-    "heroPhotoAlt": "Hands knitting dark yarn on a circular needle",
-    "projectsTitle": "Projects",
-    "embroideryCard": {
-      "tag": "Ready to use",
-      "title": "Karelian Embroidery Designer",
-      "text": "Draft Karelian embroidery patterns on a stitch grid and download them as a PDF.",
-      "link": "Read more"
-    },
-    "knittingCard": {
-      "tag": "In the works",
-      "title": "Knitting Pattern Generator",
-      "text": "Get a knitting pattern sized to your own gauge and measurements.",
-      "link": "Read more",
-      "mockupAlt": "Mockup of the knitting pattern generator: a colourwork star chart with a palette of two yarn colours"
-    },
-    "patternsCard": {
-      "tag": "In the works",
-      "title": "Pattern Library",
-      "text": "A collection of my free knitting patterns.",
-      "link": "Browse patterns",
-      "mockupAlt": "Mockup of the pattern library: filter buttons above pattern cards"
-    },
-    "about": {
-      "title": "About me",
-      "paragraphs": [
-        "I recently graduated as a Bachelor of Science and am now continuing in the master's programme at Tampere University, majoring in communications engineering with a minor in economics.",
-        "Outside of tech I love all kinds of handcraft, from knitting to wood carving.",
-        "For now, this site focuses on fibre arts, but I'd like to branch out into other crafts in the future."
-      ],
-      "portraitAlt": "Aada knitting with red needles"
+    "title": "Oh, hello! I’m Aada Härmä, and I make web tools for fibre arts.",
+    "sceneLabel": "Oh, hello! Embroidered birds and a fox on hills under a blue sky. The hills are knitting, a book page and a mossy rock.",
+    "swipe": "swipe",
+    "creatures": {
+      "embroidery": "Embroidery designer",
+      "knitting": "Knitting pattern generator",
+      "patterns": "Pattern library",
+      "about": "About me",
+      "cv": "Download my CV"
     }
   },
   "embroidery": {
@@ -96,7 +72,8 @@
       "Print it or save it as a PDF to knit from"
     ],
     "meanwhile": "In the meantime, browse my knitting patterns",
-    "yokeCta": "Round yoke sweater calculator"
+    "yokeCta": "Round yoke sweater calculator",
+    "mockupAlt": "Mockup of the knitting pattern generator: a colourwork star chart with a palette of two yarn colours"
   },
   "theme": {
     "label": "Colour theme",
@@ -337,5 +314,18 @@
         "moreIncreasesThanStitches": "There are more increases per round than stitches at the neck. Use fewer increases per round."
       }
     }
+  },
+  "about": {
+    "metaTitle": "About me — Aada Härmä",
+    "description": "About Aada Härmä: web tools for fibre arts, studies at Tampere University and all kinds of handcraft.",
+    "title": "About me",
+    "lead": "I'm Aada, also known as BoingoDuck on the internet. I build small web tools that make pattern design easier and more accessible to everyone.",
+    "paragraphs": [
+      "I recently graduated as a Bachelor of Science and am now continuing in the master's programme at Tampere University, majoring in communications engineering with a minor in economics.",
+      "Outside of tech I love all kinds of handcraft, from knitting to wood carving.",
+      "For now, this site focuses on fibre arts, but I'd like to branch out into other crafts in the future."
+    ],
+    "portraitAlt": "Aada knitting with red needles, framed in a red and white embroidery hoop",
+    "cv": "Download my CV"
   }
 }

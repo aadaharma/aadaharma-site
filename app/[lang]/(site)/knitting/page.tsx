@@ -24,7 +24,7 @@ export default async function KnittingPage({ params }: PageProps<'/[lang]/knitti
             {t.yokeCta} →
           </a>
         </div>
-        <AppFrame url="aadaharma.com/knitting" svg={knitMockup(strings.home.knittingCard.mockupAlt)} />
+        <AppFrame url="aadaharma.com/knitting" svg={knitMockup(strings.knitting.mockupAlt)} />
       </section>
 
 

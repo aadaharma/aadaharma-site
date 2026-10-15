@@ -1,0 +1,261 @@
+/* Home: Aada's collage of hills under a blue sky, edge to edge, with an embroidered creature on
+   each hilltop (components/home/HillsScene.tsx). The footer sits below it on the linen. */
+.hills {
+  position: relative;
+}
+
+.hills__pan {
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+
+.hills__pan::-webkit-scrollbar {
+  display: none;
+}
+
+.hills__scene {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Each creature stands on its hilltop (--x, --y, in the picture's pixels) */
+.creature__spot {
+  transform: translate(var(--x), var(--y)) scale(var(--creature-scale, 1));
+}
+
+.creature {
+  cursor: pointer;
+  outline: none;
+}
+
+.creature__bob {
+  transform-box: fill-box;
+  transform-origin: 50% 100%;
+  transition: transform 0.35s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+/* Swings from where its thread meets the creature (set on each item) */
+.creature__item {
+  transform-box: fill-box;
+}
+
+/* Also the creature's hit area, so a small one is easy to tap */
+.creature__halo {
+  fill: transparent;
+  stroke: var(--rust);
+  stroke-width: 4;
+  stroke-dasharray: 12 10;
+  stroke-linecap: round;
+  opacity: 0;
+  transition: opacity 0.25s;
+}
+
+.creature:hover .creature__bob,
+.creature.is-active .creature__bob,
+.creature:focus-visible .creature__bob {
+  transform: translateY(-14px) rotate(-3deg);
+}
+
+.creature:hover .creature__item,
+.creature.is-active .creature__item,
+.creature:focus-visible .creature__item {
+  animation: swing 1.1s ease-in-out infinite alternate;
+}
+
+.creature:hover .creature__halo,
+.creature.is-active .creature__halo,
+.creature:focus-visible .creature__halo {
+  opacity: 0.9;
+  animation: halo-stitch 6s linear infinite;
+}
+
+.creature:focus-visible .creature__halo {
+  stroke-width: 6;
+}
+
+@keyframes swing {
+  from {
+    transform: rotate(-8deg);
+  }
+  to {
+    transform: rotate(8deg);
+  }
+}
+
+@keyframes halo-stitch {
+  to {
+    stroke-dashoffset: -220;
+  }
+}
+
+/* The tag: a little embroidered label hung on a thread by the creature, saying where it leads */
+.hills__tag {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  min-width: 96px;
+  padding: 10px 12px 9px;
+  background: #fffaf3;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgb(60 30 10 / 0.18), 0 8px 18px -8px rgb(60 30 10 / 0.45);
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, calc(-100% + 6px)) rotate(-2deg);
+  transition: opacity 0.18s, transform 0.25s cubic-bezier(0.3, 1.5, 0.5, 1);
+}
+
+.hills__tag.is-shown {
+  opacity: 1;
+  transform: translate(-50%, calc(-100% - 6px)) rotate(-2deg);
+}
+
+/* Running stitch round its edge */
+.hills__tag::before {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border: 1.5px dashed var(--saffron-soft);
+  border-radius: 2px;
+}
+
+/* The thread it hangs on */
+.hills__tag::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  width: 1.5px;
+  height: 12px;
+  background: var(--rust);
+}
+
+.hills__tag[data-place='right'] {
+  transform: translate(-6px, -50%) rotate(2deg);
+}
+
+.hills__tag[data-place='right'].is-shown {
+  transform: translate(10px, -50%) rotate(2deg);
+}
+
+.hills__tag[data-place='left'] {
+  transform: translate(calc(-100% + 6px), -50%) rotate(-2deg);
+}
+
+.hills__tag[data-place='left'].is-shown {
+  transform: translate(calc(-100% - 10px), -50%) rotate(-2deg);
+}
+
+.hills__tag[data-place='right']::after,
+.hills__tag[data-place='left']::after {
+  top: 50%;
+  width: 12px;
+  height: 1.5px;
+}
+
+.hills__tag[data-place='right']::after {
+  left: auto;
+  right: 100%;
+}
+
+.hills__tag[data-place='left']::after {
+  left: 100%;
+}
+
+.hills__tag[data-place='below'] {
+  transform: translate(-50%, -6px) rotate(-2deg);
+}
+
+.hills__tag[data-place='below'].is-shown {
+  transform: translate(-50%, 12px) rotate(-2deg);
+}
+
+.hills__tag[data-place='below']::after {
+  top: auto;
+  bottom: 100%;
+}
+
+.hills__tag svg,
+.hills__tag img {
+  display: block;
+  width: 64px;
+  height: 64px;
+}
+
+.hills__tag img {
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px var(--saffron-soft);
+}
+
+.hills__tag-word {
+  position: relative;
+  max-width: 11em;
+  font: 14px/1.2 var(--font-display);
+  color: var(--rust);
+  text-align: center;
+  text-wrap: balance;
+}
+
+.hills__swipe {
+  display: none;
+}
+
+/* On a phone held upright the picture is a tall panorama to swipe along, so the creatures stay
+   big enough to tap */
+@media (max-width: 760px) and (orientation: portrait) {
+  .hills {
+    --creature-scale: 1.25;
+  }
+
+  .hills__scene {
+    --h: min(68svh, 560px);
+    width: calc(var(--h) * 16 / 9);
+    height: var(--h);
+    max-width: none;
+  }
+
+  .hills__swipe {
+    display: block;
+    position: absolute;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    padding: 5px 12px 6px;
+    background: #fffaf3;
+    color: var(--rust);
+    font: 13px/1.2 var(--font-display);
+    border-radius: 4px;
+    outline: 1.5px dashed var(--saffron-soft);
+    outline-offset: -4px;
+    box-shadow: 0 6px 14px -8px rgb(60 30 10 / 0.5);
+    pointer-events: none;
+    transition: opacity 0.4s;
+  }
+
+  .hills__swipe.is-gone {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .creature__bob,
+  .hills__tag {
+    transition: none;
+  }
+
+  .creature:hover .creature__item,
+  .creature.is-active .creature__item,
+  .creature:focus-visible .creature__item,
+  .creature:hover .creature__halo,
+  .creature.is-active .creature__halo,
+  .creature:focus-visible .creature__halo {
+    animation: none;
+  }
+}
