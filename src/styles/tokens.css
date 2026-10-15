@@ -10,12 +10,14 @@
   font-display: swap;
 }
 
-/* Gold, pink & maroon: a pale pink page with maroon headings, links and buttons, and gold
-   for tags and the page border. Dark mode is near-black maroon with pink links and gold.
+/* Gold, pink & maroon on natural linen: maroon headings, links and buttons, gold for tags
+   and the page border, pink as the third thread colour. The linen weave itself is a photo
+   multiplied over --linen (src/styles/base.css).
+   Dark mode is near-black maroon with pink links and gold.
    Dark mode is switched off for now: <html> always has data-theme="light", so the dark
    colours below aren't used (see components/ThemeToggle.tsx). */
 :root {
-  --linen: #fbf0f8;
+  --linen: #ece3d2;
   --surface: #fffafd;
   --chrome: color-mix(in srgb, var(--ink) 6%, var(--surface));
   --ink: #2b0b0b;
@@ -28,9 +30,6 @@
   --line: #ecd3e3;
   --pink: #ffd5fb;
   --border-ink: color-mix(in srgb, #c18d17 70%, var(--linen));
-  /* The dithered page background: dots of these two tints on the page colour */
-  --tint-1: #ffd5fb;
-  --tint-2: #ecc77e;
   /* The home page's dithered photo: its dark, middle and light colours */
   --dith-dark: #800000;
   --dith-mid: #c18d17;
@@ -67,8 +66,6 @@
     --line: #4a1c1c;
     --pink: #ffd5fb;
     --border-ink: color-mix(in srgb, #c18d17 50%, var(--linen));
-    --tint-1: #4a0b0b;
-    --tint-2: #800000;
     --dith-dark: #800000;
     --dith-mid: #c18d17;
     --dith-light: #ffd5fb;
@@ -94,8 +91,6 @@
   --line: #4a1c1c;
   --pink: #ffd5fb;
   --border-ink: color-mix(in srgb, #c18d17 50%, var(--linen));
-  --tint-1: #4a0b0b;
-  --tint-2: #800000;
   --dith-dark: #800000;
   --dith-mid: #c18d17;
   --dith-light: #ffd5fb;
