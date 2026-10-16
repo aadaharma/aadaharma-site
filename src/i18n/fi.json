@@ -39,39 +39,36 @@
     "cta": "Avaa suunnittelija",
     "photoAlt": "Kirjottu kirjanmerkki: valkoisia karjalaistyylisiä lintuja ja kiemuroita sinisellä kankaalla",
     "screenshotAlt": "Kuvakaappaus karjalaisen kirjonnan suunnittelijasta: pistotyökalujen työkalurivi ja ruudukko, jolle on piirretty punainen lintukuvio",
-    "featuresTitle": "Nykyiset ominaisuudet",
+    "featuresTitle": "Ominaisuudet",
     "features": [
       "Piirrä ruudukolle suoria, vinoja ja ristipistoja",
       "Valitse langan väri",
       "Määritä mallin leveys ja korkeus",
       "Pyyhi virheet tai aloita alusta tyhjällä ruudukolla",
-      "Lataa valmis malli PDF-tiedostona"
-    ],
-    "plannedTitle": "Tulevat ominaisuudet",
-    "planned": [
-      "Valmiita perinteisiä kuvioita mallipohjiksi",
-      "Omien kuvioiden tallentaminen mallipohjiksi"
+      "Lataa valmis malli PDF-tiedostona",
+      "Valmiita perinteisiä kuvioita"
     ],
     "traditionTitle": "Karjalaisesta kirjonnasta",
     "tradition": "Karjalainen kirjonta on perinteinen lankoja laskien tehtävä kirjontatekniikka Karjalasta. Pistot seuraavat tasakutoisen kankaan lankoja ja muodostavat geometrisia kuvioita: vinoneliöitä, ristejä, oksia ja lintuja. Kirjonta tehdään perinteisesti punaisella valkoiselle pellavalle.",
     "closingTitle": "Valmiina suunnittelemaan oman mallisi?"
   },
   "knitting": {
-    "metaTitle": "Neulemallien generaattori",
-    "description": "Tuleva työkalu kirjoneuleen mallikaavioiden suunnitteluun.",
-    "title": "Neulemallien generaattori",
-    "lead": "Työkalu kirjoneuleen mallikaavioiden suunnitteluun: juuri sellaisten, joita neulon esimerkiksi tällaisiin sukkiin.",
+    "metaTitle": "Neuleohjegeneraattori",
+    "description": "Tuleva työkalu neuleohjeiden suunnitteluun omien mittojen pohjalta.",
+    "title": "Neuleohjegeneraattori",
+    "lead": "Työkalu omien neuletöiden suunnitteluun mittojesi ja neuletiheytesi pohjalta.",
     "photoAlt": "Keskeneräinen sukka sukkapuikoilla, vihreä-harmaa kirjoneulekuvio",
     "plansTitle": "Mitä suunnittelen",
     "plans": [
-      "Piirrä kirjoneulekuvioita ruutukaavioon",
-      "Toista kuvioita silmukkamäärään sopiviksi",
-      "Laske silmukat ja kerrokset neuletiheydestä",
-      "Vie kaaviot tulostettaviksi tai neulottaviksi"
+      "Valitse neuletyö, esimerkiksi sukat, lapaset tai pipo",
+      "Syötä mittasi ja haluamasi koko",
+      "Neulo mallitilkku ja syötä neuletiheys silmukoina ja kerroksina 10 cm:llä",
+      "Saat kirjallisen ohjeen, jossa silmukka- ja kerrosmäärät on laskettu valmiiksi",
+      "Tulosta ohje tai tallenna se PDF-tiedostona neulomista varten"
     ],
     "meanwhile": "Sillä välin voit selata neuleohjeitani",
     "yokeCta": "Pyöreän kaarrokkeen laskuri",
-    "mockupAlt": "Luonnos neulemallien generaattorista: kirjoneuleen tähtikaavio ja kahden langan väripaletti"
+    "mockupAlt": "Luonnos neuleohjegeneraattorista: kirjoneuleen tähtikaavio ja kahden langan väripaletti"
   },
   "theme": {
     "label": "Väriteema",
