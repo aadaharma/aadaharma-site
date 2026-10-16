@@ -38,14 +38,6 @@ export default async function EmbroideryPage({ params }: PageProps<'/[lang]/embr
             ))}
           </ul>
         </div>
-        <div className="panel reveal">
-          <h2>{t.plannedTitle}</h2>
-          <ul className="stitch-list">
-            {t.planned.map((item) => (
-              <li key={item}>{item}</li>
-            ))}
-          </ul>
-        </div>
       </section>
 
       <section className="container section made" aria-labelledby="tradition-title">

@@ -39,18 +39,14 @@
     "cta": "Avaa suunnittelija",
     "photoAlt": "Kirjottu kirjanmerkki: valkoisia karjalaistyylisiä lintuja ja kiemuroita sinisellä kankaalla",
     "screenshotAlt": "Kuvakaappaus karjalaisen kirjonnan suunnittelijasta: pistotyökalujen työkalurivi ja ruudukko, jolle on piirretty punainen lintukuvio",
-    "featuresTitle": "Nykyiset ominaisuudet",
+    "featuresTitle": "Ominaisuudet",
     "features": [
       "Piirrä ruudukolle suoria, vinoja ja ristipistoja",
       "Valitse langan väri",
       "Määritä mallin leveys ja korkeus",
       "Pyyhi virheet tai aloita alusta tyhjällä ruudukolla",
-      "Lataa valmis malli PDF-tiedostona"
-    ],
-    "plannedTitle": "Tulevat ominaisuudet",
-    "planned": [
-      "Valmiita perinteisiä kuvioita mallipohjiksi",
-      "Omien kuvioiden tallentaminen mallipohjiksi"
+      "Lataa valmis malli PDF-tiedostona",
+      "Valmiita perinteisiä kuvioita"
     ],
     "traditionTitle": "Karjalaisesta kirjonnasta",
     "tradition": "Karjalainen kirjonta on perinteinen lankoja laskien tehtävä kirjontatekniikka Karjalasta. Pistot seuraavat tasakutoisen kankaan lankoja ja muodostavat geometrisia kuvioita: vinoneliöitä, ristejä, oksia ja lintuja. Kirjonta tehdään perinteisesti punaisella valkoiselle pellavalle.",
