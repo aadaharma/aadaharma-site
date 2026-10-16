@@ -53,21 +53,22 @@
     "closingTitle": "Valmiina suunnittelemaan oman mallisi?"
   },
   "knitting": {
-    "metaTitle": "Neulemallien generaattori",
-    "description": "Tuleva työkalu kirjoneuleen mallikaavioiden suunnitteluun.",
-    "title": "Neulemallien generaattori",
-    "lead": "Työkalu kirjoneuleen mallikaavioiden suunnitteluun: juuri sellaisten, joita neulon esimerkiksi tällaisiin sukkiin.",
+    "metaTitle": "Neuleohjegeneraattori",
+    "description": "Tuleva työkalu neuleohjeiden suunnitteluun omien mittojen pohjalta.",
+    "title": "Neuleohjegeneraattori",
+    "lead": "Työkalu omien neuletöiden suunnitteluun mittojesi ja neuletiheytesi pohjalta.",
     "photoAlt": "Keskeneräinen sukka sukkapuikoilla, vihreä-harmaa kirjoneulekuvio",
     "plansTitle": "Mitä suunnittelen",
     "plans": [
-      "Piirrä kirjoneulekuvioita ruutukaavioon",
-      "Toista kuvioita silmukkamäärään sopiviksi",
-      "Laske silmukat ja kerrokset neuletiheydestä",
-      "Vie kaaviot tulostettaviksi tai neulottaviksi"
+      "Valitse neuletyö, esimerkiksi sukat, lapaset tai pipo",
+      "Syötä mittasi ja haluamasi koko",
+      "Neulo mallitilkku ja syötä neuletiheys silmukoina ja kerroksina 10 cm:llä",
+      "Saat kirjallisen ohjeen, jossa silmukka- ja kerrosmäärät on laskettu valmiiksi",
+      "Tulosta ohje tai tallenna se PDF-tiedostona neulomista varten"
     ],
     "meanwhile": "Sillä välin voit selata neuleohjeitani",
     "yokeCta": "Pyöreän kaarrokkeen laskuri",
-    "mockupAlt": "Luonnos neulemallien generaattorista: kirjoneuleen tähtikaavio ja kahden langan väripaletti"
+    "mockupAlt": "Luonnos neuleohjegeneraattorista: kirjoneuleen tähtikaavio ja kahden langan väripaletti"
   },
   "theme": {
     "label": "Väriteema",
