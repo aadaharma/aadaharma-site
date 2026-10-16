@@ -59,6 +59,111 @@
   }
 }
 
+/* Pattern library: photos of Aada's knits, one at a time, swiped sideways */
+.knit-gallery {
+  width: min(100%, 26rem);
+  margin-inline: auto;
+}
+
+.knit-gallery__strip {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  aspect-ratio: 4 / 5;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: var(--surface);
+}
+
+.knit-gallery__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.knit-gallery__strip:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 3px;
+}
+
+.knit-gallery__strip li {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.knit-gallery__strip img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.knit-gallery__controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+.knit-gallery__arrow {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0 0 0.15em;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--rust);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.knit-gallery__arrow:hover {
+  border-color: var(--rust);
+}
+
+.knit-gallery__dots {
+  display: flex;
+  gap: 0.15rem;
+}
+
+/* A large tap target around each small dot */
+.knit-gallery__dots button {
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.knit-gallery__dots button::before {
+  content: '';
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  border: 1.5px solid var(--rust);
+}
+
+.knit-gallery__dots button[aria-current='true']::before {
+  background: var(--rust);
+}
+
+.knit-gallery button:focus-visible {
+  outline: 2px solid var(--rust);
+  outline-offset: 2px;
+}
+
 .knit-photo {
   max-width: min(100%, 26rem);
   margin-inline: auto;

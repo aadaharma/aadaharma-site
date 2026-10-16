@@ -105,9 +105,3 @@ export function swatch(style: number, w = 240, h = 180) {
   }
   return `<svg class="swatch" viewBox="0 0 ${w} ${h}" aria-hidden="true" focusable="false">${out}</svg>`
 }
-
-// Two stars side by side, for the pattern library hero.
-export function starPair() {
-  const s = 10
-  return `<svg viewBox="0 0 320 180" aria-hidden="true" focusable="false">${rect(0, 0, 320, 180, 'k-screen')}${grid(STAR, 12, 15, s)}${grid(STAR, 158, 15, s)}</svg>`
-}
