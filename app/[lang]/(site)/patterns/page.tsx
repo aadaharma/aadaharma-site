@@ -1,7 +1,7 @@
-import { AppFrame } from '@/components/decorations'
+import { KnitGallery } from '@/components/KnitGallery'
 import { PatternLibrary, type PatternCard } from '@/components/PatternLibrary'
 import { getStrings, type Lang } from '@/lib/i18n'
-import { starPair } from '@/lib/knit-art'
+import { KNIT_PHOTOS } from '@/lib/knits'
 import { pageMetadata } from '@/lib/metadata'
 import { facets, listPatterns } from '@/lib/patterns'
 
@@ -29,7 +29,7 @@ export default async function PatternsPage({ params }: PageProps<'/[lang]/patter
           <h1>{t.title}</h1>
           <p className="lead">{t.lead}</p>
         </div>
-        <AppFrame url={t.heroCaption} svg={starPair()} />
+        <KnitGallery lang={lang} t={t.gallery} photos={KNIT_PHOTOS} />
       </section>
 
 

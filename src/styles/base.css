@@ -35,6 +35,8 @@ h3 {
   line-height: 1.15;
   margin: 0 0 0.6em;
   text-wrap: balance;
+  /* Long Finnish compounds break (at a soft hyphen if they have one) instead of overflowing */
+  overflow-wrap: break-word;
 }
 
 h1 {

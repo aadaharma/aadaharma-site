@@ -85,7 +85,12 @@
     "description": "Free knitting patterns written by Aada Härmä.",
     "title": "Knitting Pattern Library",
     "lead": "A collection of my free knitting patterns.",
-    "heroCaption": "Selbu star · 15 × 15 stitches",
+    "gallery": {
+      "label": "My knits",
+      "previous": "Previous photo",
+      "next": "Next photo",
+      "photo": "Photo {n} of {total}"
+    },
     "listTitle": "All patterns",
     "filters": {
       "craft": "Garment",

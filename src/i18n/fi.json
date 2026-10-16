@@ -82,9 +82,14 @@
   "patterns": {
     "metaTitle": "Neuleohjeet",
     "description": "Aada Härmän kirjoittamia ilmaisia neuleohjeita: langat, puikot, neuletiheys ja kirjoneulekaaviot. Valmiina tulostettaviksi.",
-    "title": "Neuleohjekirjasto",
+    "title": "Neuleohje\u00adkirjasto",
     "lead": "Kokoelma ilmaisia neuleohjeitani.",
-    "heroCaption": "Selbun tähti · 15 × 15 silmukkaa",
+    "gallery": {
+      "label": "Neulomiani",
+      "previous": "Edellinen kuva",
+      "next": "Seuraava kuva",
+      "photo": "Kuva {n}/{total}"
+    },
     "listTitle": "Kaikki ohjeet",
     "filters": {
       "craft": "Neule",
